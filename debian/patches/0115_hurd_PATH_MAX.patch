@@ -1,0 +1,81 @@
+Description: Add on hurdi386 missing PATH_MAX 
+Author: Jörg Frings-Fürst <debian@jff-webhosting.net>
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=762774
+Last-Update: 2014-09-25
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/numlib/numsup.c
++++ b/numlib/numsup.c
+@@ -46,8 +46,12 @@
+  */
+ 
+ /* Globals */
+ 
++#ifndef PATH_MAX
++#define PATH_MAX 4096
++#endif
++
+ char *exe_path = "\000";			/* Directory executable resides in ('/' dir separator) */
+ //char *error_program = "Unknown";	/* Name to report as responsible for an error */
+ 
+ static int g_log_init = 0;	/* Initialised ? */
+--- a/spectro/mongoose.c
++++ b/spectro/mongoose.c
+@@ -47,8 +47,12 @@
+ 
+ 	added to /usr/lib/firewalld/services
+  */
+ 
++#ifndef PATH_MAX
++#define PATH_MAX 4096
++#endif
++
+ #if defined(_WIN32)
+ #define _CRT_SECURE_NO_WARNINGS // Disable deprecation warning in VS2005
+ #else 
+ #ifdef __linux__
+--- a/spectro/usbio_lx.c
++++ b/spectro/usbio_lx.c
+@@ -33,8 +33,12 @@
+ #include <sys/poll.h>	/* Else assume poll() is native */
+ #define poll_x poll
+ #endif
+ 
++#ifndef PATH_MAX
++#define PATH_MAX 4096
++#endif
++
+ /* USB descriptors are little endian */
+ 
+ /* Take a word sized return buffer, and convert it to an unsigned int */
+ static unsigned int buf2uint(unsigned char *buf) {
+--- a/spectro/usbio_nt.c
++++ b/spectro/usbio_nt.c
+@@ -30,8 +30,12 @@
+ #define LIBUSBW1_MAX_DEVICES 255
+ #define LIBUSBW1_PATH_MAX 512
+ #define LIBUSBW1_DEFAULT_TIMEOUT 5000
+ 
++#ifndef PATH_MAX
++#define PATH_MAX 4096
++#endif
++
+ /* USB descriptors are little endian */
+ 
+ /* Take a word sized return buffer, and convert it to an unsigned int */
+ static unsigned int buf2uint(unsigned char *buf) {
+--- a/spectro/hidio.c
++++ b/spectro/hidio.c
+@@ -100,8 +100,12 @@
+ # define HID_MAX_USAGES 1024
+ #endif
+ #endif
+ 
++#ifndef PATH_MAX
++#define PATH_MAX 4096
++#endif
++
+ #if defined(NT)
+ 
+ /* Declartions to enable HID access without using the DDK */
+ 

@@ -1,5 +1,877 @@
-template-repository (1.0-1) unstable; urgency=medium
+argyll (2.3.1+repack-1.1) unstable; urgency=medium
 
-  * Initial release
+  * Non-maintainer upload.
+  * source only upload to enable migration (Closes: #1019120)
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Paul Gevers <elbrus@debian.org>  Sun, 04 Sep 2022 08:04:18 +0200
+
+argyll (2.3.1+repack-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Standards-Version: 4.6.1.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Tue, 05 Jul 2022 16:29:58 +1000
+
+argyll (2.3.0+repack-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 30 Mar 2022 19:32:34 +1100
+
+argyll (2.2.0+repack-1) unstable; urgency=medium
+
+  * New upstream release
+    Thanks, Federico Grau.
+  * Standards-Version: 4.6.0.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Tue, 31 Aug 2021 23:08:28 +1000
+
+argyll (2.0.1+repack-2) unstable; urgency=medium
+
+  * Moved repository back to Salsa.
+  * Rules-Requires-Root: no
+  * d/clean generated file.
+  * DH to version 12.
+  * Standards-Version: 4.5.1
+  * Set myself as Maintainer (Closes: #789557).
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Tue, 27 Apr 2021 20:12:54 +1000
+
+argyll (2.0.1+repack-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Fix build with GCC 10 in 999_GCC-10-fix patch (Closes: #957008)
+
+ -- Christian Marillat <marillat@debian.org>  Thu, 05 Nov 2020 23:23:35 +0100
+
+argyll (2.0.1+repack-1) unstable; urgency=medium
+
+  * New upstream release:
+    - Refresh patches.
+  * Remove obsolete /etc/hotplug/usb/Argyll.usermap (Closes: #885549).
+  * Add more typos to patches/0100_spelling.patch.
+  * Declare compliance with Debian Policy 4.1.5 (No changes needed).
+  * Migrate to debhelper 11:
+    - Change debian/compat to 11.
+    - Bump minimum debhelper version in debian/control to >= 11.
+  * debian/rules:
+    - Correct doc directory handling.
+    - Remove override_dh_strip, used for debug symbol migration.
+  * debian/control:
+    - Switch Vcs-* to new location.
+  * debian/copyright:
+    - Add copyright for numlib/quadprog.*.
+    - Use secure copyright format URI.
+    - Correct typo.
+    - Refresh copyright years.
+  * Remove *.postinst, *.postrm and *.preinst. They was used for release
+     1.6.3-2 and at oldstable are 1.6.3-4.
+  * Remove useless debian/repack.sh.
+
+ -- Jörg Frings-Fürst <debian@jff.email>  Sun, 15 Jul 2018 22:49:02 +0200
+
+argyll (2.0.0+repack-1) unstable; urgency=medium
+
+  * Switch from repack to Files-Excluded.
+  * Refresh patches.
+  * Change to my new email address.
+  * debian/changelog:
+    - Remove trailing whitespaces.
+  * debian/control:
+    - Remove duplicates Priority fields.
+    - Requested versions are lesser as there are in old-stable:
+      + Remove dpkg amd dpkg-dev from (Build|Pre)-Depends.
+      + Remove versions from Recommend udev.
+      + Remove Replaces & Breaks argyll from argyll-ref.
+  * debian/rules:
+    - Add script to remove executable flag from upstream source.
+  * Declare compliance with Debian Policy 4.1.2.0 (No changes needed).
+  * Change to secure URI.
+    - Homepage in debian/copyright, debian/watch and debian/control.
+  * debian/patches/0130_openssl.patch:
+    - Switch from SSLv23_client_method to TLS_client_method (Closes: #871427).
+
+ -- Jörg Frings-Fürst <debian@jff.email>  Fri, 01 Dec 2017 10:35:30 +0100
+
+argyll (1.9.2+repack-2) unstable; urgency=medium
+
+  * New README.source to explain the branching model used.
+  * Declare compliance with Debian Policy 4.0.1. (No changes needed).
+  * debian/copyright:
+    - Add 2017 to debian/*.
+  * debian/control:
+    - Remove dh-autoreconf.
+      + Not longer needed since debhelper compatibility level >= 10.
+  * debian/rules:
+    - For better handling replace dpkg-parsechangelog with SOURCE_DATE_EPOCH
+      from pkg-info.mk.
+  * New patch 0130_openssl.patch:
+    - Enable all ssl connections since openssl provides only connetions with
+      TLS1.2 or greater (Closes: #871427).
+  * Use the automatic debug symbol packages:
+    - Remove argyll-dbg section from debian/control.
+    - Use --dbgsym-migration at override_dh_strip from debian/rules.
+  * Refresh patches:
+    - 0100_spelling.patch.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Thu, 31 Aug 2017 06:49:06 +0200
+
+argyll (1.9.2+repack-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Refresh patches.
+  * Bump compat to 10:
+    - Change debian/compat to 10.
+    - Change debhelper version at debian/control to >= 10.
+  * debian/control:
+    - Bump Standards-Version to 3.9.8 (no changes required).
+    - Change VCS-Browser to secure URI.
+  * debian/copyright:
+    - Add year 2016 for upstream.
+  * debian/rules:
+    - Make the build reproducible (Closes: #835265).
+      (Thanks to Chris Lamb <lamby@debian.org>)
+    - Remove License4.txt from argyll-doc.
+  * debian/watch:
+    - Bump Version to 4 (no changes required).
+  * Enable hardening:
+    - Refresh debian/patches/0001_jam.patch.
+    - Add hardening=+all to DEB_BUILD_MAINT_OPTIONS at debian/rules.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Sun, 23 Oct 2016 03:37:00 +0200
+
+argyll (1.8.3+repack-2) unstable; urgency=medium
+
+  * debian/copyright: Add 2016.
+  * debian/control:
+    - Transition libpng: Change Build-Depends from libpng16-dev to libpng-dev
+      (Closes: #810178).
+    - Transition libusb: Change Build-Depends from libusb-dev to
+      libusb-1.0-0-dev (Closes: #810398).
+    - Set priority of argyll-ref to extra.
+  * Rename patches.
+  * Refresh debian/patches/0100_spelling.patch.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Sun, 17 Jan 2016 18:59:21 +0100
+
+argyll (1.8.3+repack-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches.
+  * Move download and repack from debian/rules to uscan:
+    - Add debian debian/repack.sh to debian/watch.
+    - New debian/repack.sh.
+    - Remove get-orig-source from debian/rules.
+  * debian/rules:
+    - Remove tests for the gcc-5 transition.
+  * Rename debian/missing-sources/x3dom.debug.js to x3dom.js.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Fri, 06 Nov 2015 09:03:08 +0100
+
+argyll (1.8.2+repack-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Add x3dom.debug.js to debian/missing-sources.
+  * debian/control:
+    - For use of the system library instead of the Argyll library
+      add libssl-dev to Build-Depends
+  * debian/patches/100_spelling.patch:
+    - Add some more typos.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Wed, 30 Sep 2015 16:03:54 +0200
+
+argyll (1.8.0+repack-1) unstable; urgency=low
+
+  * New upstream release.
+  * Refresh patches:
+    - debian/patches/15_jam.patch
+    - debian/patches/100_spelling.patch
+    - debian/patches/110_dispwin_segfault.patch
+  * debian/rules:
+    - Rewrite VERSION sniplet.
+    - get-orig-source:
+      + Remove executable flag from source.
+  * Refresh debian/copyright.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Sun, 23 Aug 2015 17:27:26 +0200
+
+argyll (1.7.0+repack-4) unstable; urgency=medium
+
+  * debian/rules:
+    - Add --utc to the command date for CRDATE to make the results
+      reproducible over different timezones.
+  * New debian/patches/30_gcc5.patch:
+    - Add gcc-5 support (Closes: #777779).
+      + Thanks to James Cowgill <james410@cowgill.org.uk>.
+  * Re-enable and refresh debian/patches/20_hurd_PATH_MAX.patch.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Sun, 05 Jul 2015 12:30:03 +0200
+
+argyll (1.7.0+repack-3) unstable; urgency=medium
+
+  * debian/watch:
+    - change opts to support for "+repack".
+  * debian/patches/15_jam.patch:
+    - Add support for mips64el (Closes: #788447).
+  * debian/control:
+    - Correct some priorities.
+    - Remove package icc-utils because last version
+      in stable is greater then 1.6.3-1.
+  * Remove useless debian/argyll.lintian-overrides.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Fri, 12 Jun 2015 12:13:59 +0200
+
+argyll (1.7.0+repack-2) unstable; urgency=medium
+
+  * debian/patches/15_jam.patch:
+    - Rewrite rules to find libraries on all architectures.
+  * debian/control:
+    - Add zlib1g-dev to Build-Depends.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Mon, 04 May 2015 10:15:34 +0200
+
+argyll (1.7.0+repack-1) unstable; urgency=low
+
+  * Set package type to +repack.
+  * debian/control:
+    - Add libpng12-dev to build-Depends.
+    - Set Priority to optional.
+    - At package icc-utils and argyll-dbg set the Priority to extra.
+  * Make debian/man/scanin.1 more readable (LP: #1192368).
+  * Make build results reproducible:
+    - debian/rules:
+      + Replace build timestamps from ref files with date/time from
+        debian/changelog.
+    - debian/control:
+      + Add dpkg-dev to Build-Depends.
+  * debian/rules:
+    - get-orig-source:
+      + Remove unwanted Windows binaries.
+      + Remove unused sources: tiff, jpeg, zlib, png.
+    - Add ls2ti3 to build-manpages.
+    - New override_dh_compress:
+      + Don't compress html files.
+  * debian/copyright:
+    - Remove unused tags.
+    - Add new files.
+    - Set year 2015.
+    - Reorder files to prevend lintian warnings.
+  * Remove patches:
+    - 120_usb-db_new.patch applied upstream.
+    - 20_hurd_PATH_MAX.patch & 25_kfreebsd.patch not more needed.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Sun, 03 May 2015 19:36:05 +0200
+
+argyll (1.6.3-4) unstable; urgency=medium
+
+  * debian/control:
+    - On package argyll replace the wrong Replaces & Conflicts of argyll-bin
+      with the right Breaks & Replaces to icc-utils (<< 1.6.3-1).
+      (Closes: #767837)
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Tue, 04 Nov 2014 07:59:20 +0100
+
+argyll (1.6.3-3) unstable; urgency=medium
+
+  * debian/control:
+    - Replace Architecture: any with linux-any to prevent KFreeBSD-* and
+      hurd-i386 from build during unusable usb system (Closes: #762773).
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Sun, 05 Oct 2014 19:31:16 +0200
+
+argyll (1.6.3-2) unstable; urgency=medium
+
+  * debian/control:
+    - Bump Standards-Version to 3.9.6 (no changes required).
+    - Add Replaces: argyll (<< 1.6.3-1) and
+      Breaks (<< 1.6.3-1) to argyll-ref (Closes: #762780).
+    - At argyll move argyll-doc from Depends to Suggests (Closes: #762850).
+    - Remove from Build-Depends libusbhid-dev [kfreebsd-any].
+    - Remove  ${shlibs:Depends} from Depends on argyll-doc and argyll-ref.
+  * debian/patches/15_jam.patch:
+    - To avoid use of the builtin libtiff and libjpeg add multiarch directories
+      for searching libraries and header files by using DEB_HOST_MULTIARCH
+      (Closes: #762772).
+  * New debian/patches/20_hurd_PATH_MAX.patch:
+    - Add missing PATH_MAX for hurd-i386 (Closes: #762774).
+  * debian/rules:
+    - Remove the move of the html docs into a subdirectory (Closes: #762771).
+    - Remove useless BUILTIN_TIFF=false from JAMCMDLINE.
+    - Remove "-A --link-doc=argyll-doc" from dh_installdocs (Closes: #762853).
+  * debian/*.(postinst|preinst|postrm):
+    - Replace dpkg-maintscript-helper dir_to_symlink to sysmlink_to_dir.
+  * Remove useless debian/argyll.examples
+  * Remove obsolete debian/patches/03_usb-db.diff.
+  * New debian/patches/120_usb-db_new.patch: (Closes: #762887)
+    - Instead of the obsolete usb-db use the builtin hwdb in the udev rules.
+      Thanks to Michael Biebl <biebl@debian.org>
+  * New debian/patches/25_kfreebsd.patch:
+    - Prevent build errors on kfreebsd-* (Closes: #762773).
+      Thanks to Steven Chamberlain <steven@pyro.eu.org>
+  * New debian/README.debian with notes to KFreeBSD-*.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Mon, 29 Sep 2014 09:22:15 +0200
+
+argyll (1.6.3-1) unstable; urgency=medium
+
+  * New Maintainer (Closes: #720178).
+  * New upstream release (Closes: #742658).
+  * debian/rules:
+    - Add get-orig-source.
+    - Remove useless --with quilt from dh $@
+    - Remove section for not included spyder2 firmware.
+    - Rewrite for use of upstream build system.
+  * debian/control:
+    - Set myself as maintainer.
+    - Update Build-Depends:
+      + Remove automake | automaken
+    - For previously not existing Vcs
+      + Create a new git repository on alioth.
+      + Add the fields Vcs-Browser and Vcs-Git.
+    - Change Priority from optional to extra.
+    - Remove useless packages:
+      + icc-utils
+        Now in argyll. Now only dummy package.
+        Change section to oldlibs
+      + libicc2 & libicc-dev
+        Useless. Only linked to argyll & icc-utils.
+      + libimdi0 & libimdi-dev
+        Useless. Only linked to argyll & icc-utils.
+    - Move documentation to new package argyll-doc
+      and symlink into the other packages.
+    - Add Pre-Depends:
+      * dpkg (>= 1.17.5) for use of the dpkg-maintscript-helper.
+  * debian/copyright:
+    - Rewrite into DEP-5 format.
+    - Add myself to the list of authors for debian/*.
+    - Add missing licenses and authors.
+  * debian/*.1
+    - Move to debian/man/*.1.
+  * debian/man/*
+    - Rewrite the help2man generated man pages (Closes: #670857)
+  * debian/patches/
+    - New 110_dispwin_segfault.patch to prevent segfault by
+      wrong parameter (Closes: #700253)
+    - Rewrite 03_usb-db.diff for new upstream release.
+    - Remove patches that included into new upstream release or useless:
+      + 01_autotools-support.diff
+      + 02_firmware-package-builder.diff
+      + 03_kfreebsd.diff
+      + 04_CVE-2012-4405.diff
+      + 05_external-yajl.diff
+      + 06_fix_udev_rule.patch
+  * New debian/*.(postinst|preinst|postrm):
+      - Remove existing doc directory and replace it with
+        a symlink to argyll-doc with dpkg-maintscript-helper dir_to_symlink.
+  * debian/argyll.preinst:
+      - Remove useless rm_conffile(). First version in Debian was 1.1.1-1,
+        rm_conffile was for version less equal 1.1.0-3.
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Wed, 17 Sep 2014 08:47:26 +0200
+
+argyll (1.5.1-8) unstable; urgency=medium
+
+  * QA upload.
+  * Add a symbols file for libicc2 and libimdi0.
+
+ -- Iain Lane <laney@debian.org>  Mon, 09 Jun 2014 12:52:11 +0100
+
+argyll (1.5.1-7) unstable; urgency=medium
+
+  * QA upload.
+  * debian/control: Bump udev recommended version to >= 196
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 04 May 2014 22:30:57 +0200
+
+argyll (1.5.1-6) unstable; urgency=medium
+
+  * QA upload.
+  * debian/patches/03_usb-db.diff: Use hwdb builtin, instead of the obsolete
+    usb-db in the udev rules.
+  * debian/patches/06_fix_udev_rule.patch: Fix udev rules to actually work;
+    ENV{ACL_MANAGE} has stopped working ages ago, and with logind it's now the
+    "uaccess" tag. Dropping also consolekit from Recommends. (Closes: #746974)
+  * debian/rules: Add libpam-systemd as a recommends to be sure we have a
+    session registered, this is needed for the permissions on the devices.
+  * debian/control: Build-depend on libtiff-dev rather than libtiff4-dev.
+    (Closes: #733126)
+  * debian/control: Drop Uploaders as the package has been orphaned
+  * debian/control: Bump Standards-Version to 3.9.5 (no further changes)
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 04 May 2014 21:36:24 +0200
+
+argyll (1.5.1-5) unstable; urgency=low
+
+  * Package orphaned. I don't intent to support the work of an agressive
+    upstream author more longer and realy good luck for the next maintainer.
+
+ -- Christian Marillat <marillat@debian.org>  Mon, 19 Aug 2013 14:18:29 +0200
+
+argyll (1.5.1-4) unstable; urgency=low
+
+  * Revert previous yajl patch this break argyll.
+  * Regenerate all manpages.
+  * Add colord and gir1.2-colordgtk-1.0 in Suggests.
+  * Don't package .a and .la files.
+
+ -- Christian Marillat <marillat@debian.org>  Mon, 12 Aug 2013 15:51:54 +0200
+
+argyll (1.5.1-3) unstable; urgency=low
+
+  * Uptade patch 01_autotools-support with patch from bug report to link
+    argyll against external yajl also add an one line patch called
+    05_external-yajl (Closes: #544223)
+
+ -- Christian Marillat <marillat@debian.org>  Fri, 02 Aug 2013 08:10:38 +0200
+
+argyll (1.5.1-2) unstable; urgency=low
+
+  * Package iccdump.1 and icclu.1 only in icc-utils package
+    (Closes: #717990, # 717993).
+
+ -- Christian Marillat <marillat@debian.org>  Sat, 27 Jul 2013 21:43:59 +0200
+
+argyll (1.5.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Removed 03_kfreebsd patch.
+  * Refresh 01_autotools-support patch (CLoses: 713545)
+  * New patch 03_usb-db to add support for newer udev (Closes: 717504)
+
+ -- Christian Marillat <marillat@debian.org>  Fri, 26 Jul 2013 16:25:19 +0200
+
+argyll (1.4.0-8) unstable; urgency=low
+
+  * Add a Breaks field and update the version in the Replaces field for the
+    icc-utils package (Closes: #694287)
+
+ -- Christian Marillat <marillat@debian.org>  Sun, 25 Nov 2012 09:59:35 +0100
+
+argyll (1.4.0-7) unstable; urgency=high
+
+  * New patch 04_CVE-2012-4405.diff to fix CVE-2012-4405 issue
+    (Closes: #687275)
+
+ -- Christian Marillat <marillat@debian.org>  Tue, 11 Sep 2012 13:45:12 +0200
+
+argyll (1.4.0-6) unstable; urgency=low
+
+  * Use dh_autoreconf (Closes: #678909)
+
+ -- Christian Marillat <marillat@debian.org>  Mon, 25 Jun 2012 07:52:56 +0200
+
+argyll (1.4.0-5) unstable; urgency=low
+
+   * Refresh 01_autotools-support patch (Closes: #678750).
+
+ -- Christian Marillat <marillat@debian.org>  Mon, 25 Jun 2012 00:01:31 +0200
+
+argyll (1.4.0-4) unstable; urgency=low
+
+  * Should Build-Depends on libusb-dev (Closes: #670329).
+
+ -- Christian Marillat <marillat@debian.org>  Wed, 25 Apr 2012 07:46:07 +0200
+
+argyll (1.4.0-3) unstable; urgency=low
+
+  * Fix kfreebsd build. Thanks to Robert Millan for the patch.
+    (Closes: #595951 #630208).
+
+ -- Christian Marillat <marillat@debian.org>  Tue, 24 Apr 2012 07:49:03 +0200
+
+argyll (1.4.0-2) unstable; urgency=low
+
+  * Move binaries from libicc2 package to a new icc-utils package (Closes:
+    #670003).
+
+ -- Christian Marillat <marillat@debian.org>  Sun, 22 Apr 2012 16:07:43 +0200
+
+argyll (1.4.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Christian Marillat <marillat@debian.org>  Sat, 21 Apr 2012 15:53:50 +0200
+
+argyll (1.3.7-1.1) unstable; urgency=low
+
+  * Use DEB_LDFLAGS_MAINT_APPEND to add more LDFLAGS (Closes: #667924)
+
+ -- Christian Marillat <marillat@debian.org>  Mon, 09 Apr 2012 10:45:56 +0200
+
+argyll (1.3.7-1) unstable; urgency=low
+
+  * New upstream release.
+  * Try to fix the build (Thanks to Dmitry Nezhevenko) (Closes: #665055).
+  * Move to debhelper 9 for multi-arch and hardened flags.
+
+ -- Christian Marillat <marillat@debian.org>  Tue, 03 Apr 2012 08:46:37 +0200
+
+argyll (1.3.6-3) unstable; urgency=low
+
+  * Call dh_quilt_unpatch after MAKE distclean.
+  * Rework Makefile test to be sure we don't call upstream Makefile with
+    missing distclean target.
+
+ -- Christian Marillat <marillat@debian.org>  Tue, 20 Mar 2012 14:44:40 +0100
+
+argyll (1.3.6-2) unstable; urgency=low
+
+  * debian/rules Fix clean target.
+
+ -- Christian Marillat <marillat@debian.org>  Mon, 19 Mar 2012 16:50:40 +0100
+
+argyll (1.3.6-1) unstable; urgency=low
+
+  * New upstream release.
+  * Removed 03_add-ColorHug_sensor_driver patch, but beware the support for
+    ColorHug is experimental.
+
+ -- Christian Marillat <marillat@debian.org>  Mon, 19 Mar 2012 10:55:20 +0100
+
+argyll (1.3.5-7) unstable; urgency=low
+
+  * Really fix previous bug.
+  * Use debhelper 9.
+
+ -- Christian Marillat <marillat@debian.org>  Tue, 13 Mar 2012 08:41:01 +0100
+
+argyll (1.3.5-6) unstable; urgency=low
+
+  * Fix another bug in ColorHugColorHug (Closes: #661643)
+
+ -- Christian Marillat <marillat@debian.org>  Sun, 11 Mar 2012 16:59:06 +0100
+
+argyll (1.3.5-5) unstable; urgency=low
+
+  * Fix two bugs in ColorHugColorHug patch (Closes: #657582).
+
+ -- Christian Marillat <marillat@debian.org>  Sat, 28 Jan 2012 01:42:30 +0100
+
+argyll (1.3.5-4) unstable; urgency=low
+
+  * New patch 03_add-ColorHug_sensor_driver to add support for the ColorHug
+    sensor (Closes: #655888)
+
+ -- Christian Marillat <marillat@debian.org>  Tue, 17 Jan 2012 18:22:51 +0100
+
+argyll (1.3.5-3) unstable; urgency=low
+
+  * debian/rules Enable make distclean (Closes: #649728).
+
+ -- Christian Marillat <marillat@debian.org>  Wed, 23 Nov 2011 15:17:42 +0100
+
+argyll (1.3.5-2) unstable; urgency=low
+
+  * Don't package icclu and iccdump binaries in argyll, files already in
+    libicc2 package.
+
+ -- Christian Marillat <marillat@debian.org>  Mon, 21 Nov 2011 08:25:40 +0100
+
+argyll (1.3.5-1) unstable; urgency=low
+
+  [ Christian Marillat ]
+  * New maintainer (Closes: #622620) Thanks, Roland!
+  * Use dh-autoreconf.
+
+  [ Dmitry Nezhevenko ]
+  * New upstream release (Closes: #647093).
+  * Switch to dpkg-source 3.0 (quilt) format.
+  * Merge debian changes from 1.3.0 (experimental) and 1.1.1 (unstable).
+  * Unsplit libicc2, built from the same source package again (since
+    upstream only ships it as part of Argyll anyway).  Actually was already
+    done in experimental (Closes: #636801).
+  * Use kfreebsd-any instead of kfreebsd-(i386|amd64) to match kFreeBSD
+    (Closes: #634688).
+  * Provide dedicated libimdi0/libimdi-dev libraries (Closes: #611139).
+  * Add argyll-dbg package with debug symbols.
+
+ -- Christian Marillat <marillat@debian.org>  Sun, 13 Nov 2011 15:30:42 +0100
+
+argyll (1.3.0-3) experimental; urgency=low
+
+  * Minor future-proofing in debian/rules.
+  * Also removed redundant shipping of the firmware-package-builder
+    tarball, thanks to Pascal de Bruijn for noticing.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 17 Sep 2010 11:05:22 +0200
+
+argyll (1.3.0-2) experimental; urgency=low
+
+  * Fixed packaging bugs introduced when un-splitting the source package.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 14 Sep 2010 11:29:27 +0200
+
+argyll (1.3.0-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 08 Sep 2010 15:16:29 +0200
+
+argyll (1.2.1-1) experimental; urgency=low
+
+  * New upstream bugfix release.
+  * Please welcome Xavier Oswald as uploader.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 05 Sep 2010 15:50:41 +0200
+
+argyll (1.2.0-0) UNRELEASED; urgency=low
+
+  * New upstream release.
+  * Unsplit libicc2, built from the same source package again (since
+    upstream only ships it as part of Argyll anyway).
+  * Bumped Standards-Version to 3.9.1 (no changes).
+  * argyll-firmware-spyder2: Moved firmware to /usr/share/color, which is
+    freedesktop.org-compliant and (more to the point) where Argyll 1.2.0
+    looks for it.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 05 Aug 2010 15:33:20 +0200
+
+argyll (1.1.1-2) unstable; urgency=medium
+
+  * QA upload.
+  * Add ../libargyll.la to LDADD (Closes: #615692).
+  * Don't ship .la files (Closes: #621142).
+
+ -- Luk Claes <luk@debian.org>  Sat, 11 Jun 2011 11:18:43 +0200
+
+argyll (1.1.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Switched dependency on policykit-1 to a more correct recommendation on
+    consolekit + recent udev.
+  * Updated copyright file (doc is now GFDL-1.3).
+  * Bumped Standards-Version to 3.8.4 (no changes required).
+
+ -- Roland Mas <lolando@debian.org>  Wed, 24 Feb 2010 21:26:55 +0100
+
+argyll (1.1.0-5) unstable; urgency=low
+
+  * Bumped version build-dependency on libicc-dev to prevent segmentation
+    fault.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 25 Jan 2010 19:06:07 +0100
+
+argyll (1.1.0-4) unstable; urgency=low
+
+  * Adapted packaging to new udev rules, now compatible with PolicyKit-1
+    (closes: #529411).  This should fix device file permissions problems,
+    too (closes: #549406).  And also the "deprecated udev function"
+    warning (closes: #564269).
+  * Removed conffiles no longer shipped by the package.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 25 Jan 2010 13:47:59 +0100
+
+argyll (1.1.0-3) unstable; urgency=low
+
+  * Only depend on udev for Linux systems.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 25 Jan 2010 11:42:54 +0100
+
+argyll (1.1.0-2) unstable; urgency=low
+
+  * Fix build on FreeBSD, patch from Petr Salinger
+    <Petr.Salinger@seznam.cz> (closes: #566768).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 25 Jan 2010 10:29:33 +0100
+
+argyll (1.1.0-1) unstable; urgency=low
+
+  * New upstream release, including a patch obtained from upstream just
+    after the actual release.
+  * Also, stop using the system's libusb, which causes known problems with
+    Argyll.  Now using Argyll's patched copy (privately, since the patches
+    cause problems with other software).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 24 Jan 2010 23:34:18 +0100
+
+argyll (1.1.0~rc4-1) unstable; urgency=low
+
+  * New upstream pre-release.
+  * Ship all doc files with a wildcard rule, rather than a fixed (and
+    outdated) set.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 06 Jan 2010 10:33:54 +0100
+
+argyll (1.1.0~rc3-1) unstable; urgency=low
+
+  * New upstream pre-release.
+  * Moved udev rules file to /lib/udev/rules.d.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 05 Jan 2010 14:49:38 +0100
+
+argyll (1.1.0~rc2-1) unstable; urgency=low
+
+  * New upstream pre-release.
+  * Updated location of Bazaar branches in control file.
+  * The Debian-specific branch now feeds from the "midstream" branch
+    rather than the "upstream-releases" branch, to ease collaboration with
+    other distributions.  This shouldn't make any difference on the
+    package contents.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 10 Dec 2009 17:26:04 +0100
+
+argyll (1.1.0~rc1+dfsg-1) unstable; urgency=low
+
+  * Removed non-free IETF RFC/I-D from source package, thanks to Simon
+    Josefsson (closes: #555377).
+
+ -- Roland Mas <lolando@debian.org>  Sat, 14 Nov 2009 20:23:53 +0100
+
+argyll (1.1.0~rc1-3) unstable; urgency=low
+
+  * Added Build-Depends: libusbhid-dev for kFreeBSD architectures.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 09 Nov 2009 13:34:54 +0100
+
+argyll (1.1.0~rc1-2) unstable; urgency=low
+
+  * Fixed build on GNU/kFreeBSD ports.
+  * Applied patch from upstream that fixes an infinite loop if Xrandr is
+    enabled.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 09 Nov 2009 11:46:57 +0100
+
+argyll (1.1.0~rc1-1) unstable; urgency=low
+
+  * New upstream pre-release.
+  * Updated debian/copyright (upstream switched to Affero GPLv3).
+  * Bumped versioned build-dependency on debhelper.
+  * Bumped standards version to 3.8.3 (no changes needed).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 08 Nov 2009 22:19:45 +0100
+
+argyll (1.0.4-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 03 Jul 2009 14:14:11 +0200
+
+argyll (1.0.3+dfsg1-3) unstable; urgency=low
+
+  * libicc is now a separate source+binary package, so argyll now links
+    against it.
+  * Since that new libicc is a proper new upstream snapshot, the problems
+    introduced with the local patches should be fixed (closes: #524478).
+
+ -- Roland Mas <lolando@debian.org>  Tue, 02 Jun 2009 11:26:01 +0200
+
+argyll (1.0.3+dfsg1-2) unstable; urgency=low
+
+  * Adapted debian/watch file to match version mangling.
+  * Updated autotools build system to dynamically link against the
+    internal libraries and provide a libicc.so for dynamic linking.
+  * Also ship the corresponding header files.
+  * Not splitting libicc into its own binary package just yet though, I
+    want to get more testing of the dynamic linking first.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 14 May 2009 16:49:44 +0200
+
+argyll (1.0.3+dfsg1-1) unstable; urgency=low
+
+  * argyll-firmware-spyder2 is now generated as section non-free/graphics
+    rather than just graphics.
+  * Removed non-free RFC from source package (closes: #524972).
+
+ -- Roland Mas <lolando@debian.org>  Tue, 28 Apr 2009 11:47:38 +0200
+
+argyll (1.0.3-5) unstable; urgency=low
+
+  * Documented web interface for the Bazaar repository.
+  * Added source package for the Spyder2 firmware.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 17 Apr 2009 23:34:40 +0200
+
+argyll (1.0.3-4) unstable; urgency=low
+
+  * Actually create /var/lib/argyll so spyd2en can store its firmware in
+    it... also remove it on purge.
+  * Also look for the Spyder2 firmware in /lib/firmware.
+  * Shortened debian/rules quite a bit thanks to Debhelper 7.
+  * Fixed build rules so testsuite passes.
+  * Bumped standards-version to 3.8.1 (no changes).
+
+ -- Roland Mas <lolando@debian.org>  Thu, 16 Apr 2009 11:25:26 +0200
+
+argyll (1.0.3-3) unstable; urgency=low
+
+  * Another patch for icclib, this time from Jan Lieskovsky, fixing some
+    more vulnerabilities described in CVE-2009-0792 (closes: #523472).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 10 Apr 2009 17:53:55 +0200
+
+argyll (1.0.3-2) unstable; urgency=low
+
+  * Patched embedded copy of icclib to fix integer overflow and denial of
+    service vulnerabilities as described in CVE-2009-0583 and
+    CVE-2009-0584.  Patch provided by Moritz Muehlenhoff and the Debian
+    security team (closes: #522448).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 03 Apr 2009 22:43:14 +0200
+
+argyll (1.0.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * Adopted package from Christian Marillat's Debian-Multimedia
+    repository (closes: #498396).  Thanks, Christian!
+  * Stopped removing some files in clean target.
+  * Switched build-system to autotools.
+  * Link to system libusb rather than locally-shipped one.
+  * Fixed watch file.
+  * Moved Spyder2 firmware to /var/lib/argyll.
+  * Added detailed debian/copyright file.
+  * Use dh_prep instead of dh_clean -k.
+  * Rename /usr/bin/foo to /usr/bin/argyll-foo, for foo in
+    {average,refine,targen,verify}, to avoid having binaries with too
+    generic names.  Documented in README.Debian.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 19 Feb 2009 20:34:48 +0100
+
+argyll (1.0.0-0.0) unstable; urgency=low
+
+  * New upstream release.
+  * Added configuration files for udev, hal and policykit.
+
+ -- Christian Marillat <marillat@debian.org>  Fri, 18 Jul 2008 08:51:45 +0200
+
+argyll (0.60-0.1) unstable; urgency=low
+
+  * Need to Build-depends on libxinerama-dev instead of x11proto-xinerama-dev.
+
+ -- Christian Marillat <marillat@debian.org>  Fri, 21 Jul 2006 06:25:46 +0200
+
+argyll (0.60-0.0) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Christian Marillat <marillat@debian.org>  Thu, 20 Jul 2006 10:56:43 +0200
+
+argyll (0.53.1-0.2) unstable; urgency=low
+
+  * Apply a patch from Guido to fix build under ppc.
+
+ -- Christian Marillat <marillat@debian.org>  Tue, 23 May 2006 14:40:45 +0200
+
+argyll (0.53.1-0.1) unstable; urgency=low
+
+  * Add libxxf86vm-dev and x11proto-xf86vidmode-dev in build-Depends.
+
+ -- Christian Marillat <marillat@debian.org>  Fri, 12 May 2006 16:27:46 +0200
+
+argyll (0.53.1-0.0) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Christian Marillat <marillat@debian.org>  Thu,  9 Feb 2006 13:56:03 +0100
+
+argyll (0.53-0.1) unstable; urgency=low
+
+  * Rename icclink in icclink-argyll.
+  * Rename sprof in sprof-argyll.
+
+ -- Christian Marillat <marillat@debian.org>  Wed,  8 Feb 2006 11:42:15 +0100
+
+argyll (0.53-0.0) unstable; urgency=low
+
+  * Initial release.
+
+ -- Christian Marillat <marillat@debian.org>  Sun,  5 Feb 2006 22:08:11 +0100

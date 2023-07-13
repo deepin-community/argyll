@@ -1,0 +1,55 @@
+From: Steven Chamberlain <steven@pyro.eu.org>
+Subject: use FreeBSD USB I/O code on GNU/kFreeBSD
+
+Use the FreeBSD USB I/O code not just on __FreeBSD__ itself,
+but on any system having __FreeBSD_kernel__ (such as GNU/kFreeBSD).
+
+--- a/spectro/usbio.c
++++ b/spectro/usbio.c
+@@ -94,7 +94,7 @@
+ #  include "usbio_ox.c"
+ # endif
+ # if defined(UNIX_X11)
+-#  if defined(__FreeBSD__)
++#  if defined(__FreeBSD_kernel__)
+ #   include "usbio_bsd.c"
+ #  else
+ #   include "usbio_lx.c"
+--- a/spectro/usbio_bsd.c
++++ b/spectro/usbio_bsd.c
+@@ -37,7 +37,7 @@
+ #include <fcntl.h>
+ #include <glob.h>
+ #include <sys/ioctl.h>
+-#if defined(__FreeBSD__)
++#if defined(__FreeBSD_kernel__)
+ # include <dev/usb/usb_ioctl.h>		/* Not sure what's going on with FreeBSD... */
+ #else
+ # include <dev/usb/usb.h>			/* The usual include for BSD */
+@@ -59,7 +59,7 @@
+ ) {
+ 	int i, j;
+ 	char *paths[] = {
+-#if defined(__FreeBSD__)
++#if defined(__FreeBSD_kernel__)
+ 	    "/dev/usb/[0-9]*.*.0",		/* FreeBSD >= 8 */
+ 	    "/dev/ugen[0-9]*",			/* FreeBSD < 8, but no .E */
+ #else
+@@ -94,7 +94,7 @@
+ 		/* For all the nodes found by the glob */
+ 		for (i = 0; i < g.gl_pathc; i++) {
+ 
+-#if defined(__FreeBSD__)
++#if defined(__FreeBSD_kernel__)
+ 			/* Skip anything with an end point number */
+ 			if (j == 1 && strchr(g.gl_pathv[i], '.') != NULL)
+ 				continue;
+@@ -141,7 +141,7 @@
+ 		
+ 				/* Create the base device path */
+ 				dpath = g.gl_pathv[i];
+-#if defined(__FreeBSD__)
++#if defined(__FreeBSD_kernel__)
+ 				if (j == 0) {		/* Remove .0 */
+ 					if ((cp = strrchr(dpath, '.')) != NULL
+ 					 && cp[1] == '0' && cp[2] == '\000')

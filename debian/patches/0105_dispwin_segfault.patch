@@ -1,0 +1,20 @@
+Description: Add check for NULL pointer
+Author: Jörg Frings-Fürst <debian@jff-webhsoting.net>
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=700253
+Forwarded: http://www.freelists.org/post/argyllcms/dispwin-bad-command-line-option-makes-dispwin-segfault
+Reviewed-by: 
+Last-Update: 2015-08-23
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/spectro/dispwin.c
++++ b/spectro/dispwin.c
+@@ -6576,8 +6576,9 @@
+ 			}
+ 
+ 			/* Display number */
+ 			else if (argv[fa][1] == 'd') {
++				if(na == NULL)  usage(0, "-d parameter missing");
+ 				if (strncmp(na,"web",3) == 0
+ 				 || strncmp(na,"WEB",3) == 0) {
+ 					webdisp = 8080;
+ 					if (na[3] == ':') {

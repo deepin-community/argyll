@@ -1,0 +1,19 @@
+Description: Use hwdb builtin, instead of the obsolete usb-db in the udev rules.
+Author: Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/1200185
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=762887
+Last-Update: 2014-09-26
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+Index: trunk/usb/55-Argyll.rules
+===================================================================
+--- trunk.orig/usb/55-Argyll.rules	2014-09-25 11:10:12.000000000 +0200
++++ trunk/usb/55-Argyll.rules	2014-09-26 14:08:21.067295380 +0200
+@@ -85,6 +85,6 @@
+ ENV{COLOR_MEASUREMENT_DEVICE}=="*?", ENV{ACL_MANAGE}!="*?", MODE="660", GROUP="plugdev"
+ 
+ # Set ID_VENDOR and ID_MODEL acording to VID and PID
+-TEST=="/lib/udev/usb-db", IMPORT{program}="usb-db %p"
++IMPORT{builtin}="hwdb --subsystem=usb"
+ 
+ LABEL="argyll_rules_end"

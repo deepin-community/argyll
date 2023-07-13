@@ -1,0 +1,1877 @@
+Description: correct some typos
+Author: Jörg Frings-Fürst <debian@jff-webhosting.net>
+Last-Update: 2017-08-26
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/spectro/dispcal.c
++++ b/spectro/dispcal.c
+@@ -1994,9 +1994,9 @@
+ 
+ 			/* Serial port flow control */
+ 			} else if (argv[fa][1] == 'W') {
+ 				fa = nfa;
+-				if (na == NULL) usage(0,"Paramater expected following -W");
++				if (na == NULL) usage(0,"Parameter expected following -W");
+ 				if (na[0] == 'n' || na[0] == 'N')
+ 					fc = fc_None;
+ 				else if (na[0] == 'h' || na[0] == 'H')
+ 					fc = fc_Hardware;
+@@ -2017,15 +2017,15 @@
+ 
+ 			/* Black point correction amount */
+ 			} else if (argv[fa][1] == 'k') {
+ 				fa = nfa;
+-				if (na == NULL) usage(0,"Paramater expected following -k");
++				if (na == NULL) usage(0,"Parameter expected following -k");
+ 				bkcorrect = atof(na);
+ 				if (bkcorrect < 0.0 || bkcorrect > 1.0) usage(0,"-k parameter must be between 0.0 and 1.0");
+ 			/* Neutral blend rate (power) */
+ 			} else if (argv[fa][1] == 'A') {
+ 				fa = nfa;
+-				if (na == NULL) usage(0,"Paramater expected following -A");
++				if (na == NULL) usage(0,"Parameter expected following -A");
+ 				x.nbrate = atof(na);
+ 				if (x.nbrate < 0.05 || x.nbrate > 20.0) usage(0,"-A parameter must be between 0.05 and 20.0");
+ 			/* Black brightness */
+ 			} else if (argv[fa][1] == 'B') {
+@@ -2056,9 +2056,9 @@
+ #endif /* UNIX */
+ 			/* COM port  */
+ 			} else if (argv[fa][1] == 'c') {
+ 				fa = nfa;
+-				if (na == NULL) usage(0,"Paramater expected following -c");
++				if (na == NULL) usage(0,"Parameter expected following -c");
+ 				comport = atoi(na);
+ 				if (comport < 1 || comport > 50) usage(0,"-c parameter %d out of range",comport);
+ 
+ 			/* Telephoto */
+@@ -3127,9 +3127,9 @@
+ 
+ 			/* Black level adjustment */
+ 			/* Due to the possibility of the channel offsets not being even, */
+ 			/* we use the largest of the XYZ values after they have been */
+-			/* scaled to be even acording to the white XYZ balance. */
++			/* scaled to be even according to the white XYZ balance. */
+ 			/* It's safer to set the black level a bit low, and then the */
+ 			/* calibration curves can bump the low ones up. */
+ 			if (c == '1') {
+ 				col tcols[3] = {	/* Base set of test colors */
+--- a/spectro/spotread.c
++++ b/spectro/spotread.c
+@@ -707,9 +707,9 @@
+ 
+ 			/* COM port  */
+ 			} else if (argv[fa][1] == 'c') {
+ 				fa = nfa;
+-				if (na == NULL) usage("Paramater expected following -c");
++				if (na == NULL) usage("Parameter expected following -c");
+ 				{
+ 					comport = atoi(na);
+ 					if (comport < 1 || comport > 40) usage("-c parameter %d out of range",comport);
+ 				}
+@@ -717,9 +717,9 @@
+ 
+ 			/* Display type */
+ 			} else if (argv[fa][1] == 'y') {
+ 				fa = nfa;
+-				if (na == NULL) usage("Paramater expected following -y");
++				if (na == NULL) usage("Parameter expected following -y");
+ 				ditype = na[0];
+ 				if (ditype == '_' && na[1] != '\000')
+ 					ditype = ditype << 8 | na[1];
+ 
+@@ -727,9 +727,9 @@
+ 			/* Simulated instrument illumination (FWA) */
+ 			} else if (argv[fa][1] == 'I') {
+ 
+ 				fa = nfa;
+-				if (na == NULL) usage("Paramater expected following -I");
++				if (na == NULL) usage("Parameter expected following -I");
+ 				if (strcmp(na, "A") == 0
+ 				 || strcmp(na, "M0") == 0) {
+ 					tillum_set = spec = 1;
+ 					tillum = icxIT_A;
+@@ -775,9 +775,9 @@
+ 
+ 			/* Spectral Illuminant type for XYZ computation */
+ 			} else if (argv[fa][1] == 'i') {
+ 				fa = nfa;
+-				if (na == NULL) usage("Paramater expected following -i");
++				if (na == NULL) usage("Parameter expected following -i");
+ 				if (strcmp(na, "A") == 0) {
+ 					illum_set = spec = 1;
+ 					illum = icxIT_A;
+ 				} else if (strcmp(na, "C") == 0) {
+@@ -830,9 +830,9 @@
+ 
+ 			/* Spectral Observer type */
+ 			} else if (argv[fa][1] == 'Q') {
+ 				fa = nfa;
+-				if (na == NULL) usage("Paramater expected following -Q");
++				if (na == NULL) usage("Parameter expected following -Q");
+ 				if (strcmp(na, "1931_2") == 0) {			/* Classic 2 degree */
+ 					obType = icxOT_CIE_1931_2;
+ 				} else if (strcmp(na, "1964_10") == 0) {	/* Classic 10 degree */
+ 					obType = icxOT_CIE_1964_10;
+@@ -931,9 +931,9 @@
+ 
+ 			/* Filter configuration */
+ 			} else if (argv[fa][1] == 'F') {
+ 				fa = nfa;
+-				if (na == NULL) usage("Paramater expected following -F");
++				if (na == NULL) usage("Parameter expected following -F");
+ 				if (na[0] == 'n' || na[0] == 'N')
+ 					fe = inst_opt_filter_none;
+ 				else if (na[0] == '5')
+ 					fe = inst_opt_filter_D50;
+@@ -948,15 +948,15 @@
+ 
+ 			/* Extra filter compensation file */
+ 			} else if (argv[fa][1] == 'E') {
+ 				fa = nfa;
+-				if (na == NULL) usage("Paramater expected following -E");
++				if (na == NULL) usage("Parameter expected following -E");
+ 				strncpy(filtername,na,MAXNAMEL-1); filtername[MAXNAMEL-1] = '\000';
+ 
+ 			/* XRGA conversion */
+ 			} else if (argv[fa][1] == 'A') {
+ 				fa = nfa;
+-				if (na == NULL) usage("Paramater expected following -A");
++				if (na == NULL) usage("Parameter expected following -A");
+ 				if (na[0] == 'N')
+ 					calstd = xcalstd_none;
+ 				else if (na[0] == 'A')
+ 					calstd = xcalstd_xrga;
+@@ -964,9 +964,9 @@
+ 					calstd = xcalstd_xrdi;
+ 				else if (na[0] == 'G')
+ 					calstd = xcalstd_gmdi;
+ 				else
+-					usage("Paramater after -A '%c' not recognized",na[0]);
++					usage("Parameter after -A '%c' not recognized",na[0]);
+ 
+ 			/* Show Yxy */
+ 			} else if (argv[fa][1] == 'x') {
+ 				doYxy = 1;
+@@ -1774,9 +1774,9 @@
+ 			trigmode = inst_opt_trig_user;
+ 
+ 		/* Or something is wrong with instrument capabilities */
+ 		} else {
+-			printf("\nNo reasonable trigger mode avilable for this instrument\n");
++			printf("\nNo reasonable trigger mode available for this instrument\n");
+ 			it->del(it);
+ 			return -1;
+ 		}
+ 		if ((rv = it->get_set_opt(it, trigmode)) != inst_ok) {
+--- a/spectro/colorhug.c
++++ b/spectro/colorhug.c
+@@ -212,9 +212,9 @@
+ 	}
+ 
+ 	a1logd(p->log,8,"colorhug_command: Read %d bytes and %d read\n",xrbytes,rbytes);
+ 	if (rbytes >= 2) {
+-		a1logd(p->log,6,"colorhug_command: recieved cmd '%s' error '%s' args '%s'\n",
++		a1logd(p->log,6,"colorhug_command: received cmd '%s' error '%s' args '%s'\n",
+ 				inst_desc(buf[1]),
+ 				colorhug_interp_error((inst *) p, buf[0]),
+ 				icoms_tohex(buf, rbytes - 2));
+ 	}
+--- a/spectro/dispwin.c
++++ b/spectro/dispwin.c
+@@ -5381,9 +5381,9 @@
+ 		template.visualid = myvisual->visualid;
+ 		vinfo = XGetVisualInfo(p->mydisplay, VisualIDMask, &template, &nitems); 
+ 
+ 		if (nitems < 1) {
+-			debugr2((errout,"new_dispwin: Failed to get XGetVisualInfo of defalt Visual\n"));
++			debugr2((errout,"new_dispwin: Failed to get XGetVisualInfo of default Visual\n"));
+ 			dispwin_del(p);
+ 			return NULL;
+ 		}
+ 
+--- a/spectro/dtp51.c
++++ b/spectro/dtp51.c
+@@ -681,9 +681,9 @@
+ 			return "Invalid pass";
+ 		case DTP51_INVALID_STEP:
+ 			return "Invalid step";
+ 		case DTP51_NO_DATA_AVAILABLE:
+-			return "No data availble";
++			return "No data available";
+ 		case DTP51_LAMP_MARGINAL:
+ 			return "Lamp marginal";
+ 		case DTP51_LAMP_FAILURE:
+ 			return "Lamp failure";
+--- a/spectro/dtp92.c
++++ b/spectro/dtp92.c
+@@ -357,9 +357,9 @@
+ 				if (getchar() == 'Y') {
+ 					if ((ev = dtp92_command(p, tbuf, buf, MAX_MES_SIZE, 6.0)) != inst_ok)
+ 						error("Writing offset drift value failed");
+ 					else
+-						printf("Writing offset drift value suceeded!\n");
++						printf("Writing offset drift value succeeded!\n");
+ 				} else {
+ 					printf("No command written\n");
+ 				}
+ 				printf("Now try re-running program\n");
+@@ -371,9 +371,9 @@
+ //		p->icom = NULL;
+ 		return inst_coms_fail;
+ 	}
+ 
+-	a1logd(p->log, 2, "dtp92_init_coms: init coms has suceeded\n");
++	a1logd(p->log, 2, "dtp92_init_coms: init coms has succeeded\n");
+ 
+ 	p->gotcoms = 1;
+ 	return inst_ok;
+ }
+@@ -942,9 +942,9 @@
+ 			return "Badly formed parameter";
+ 		case DTP92_NO_DATA_AVAILABLE:
+ 			return "No data available";
+ 		case DTP92_MISSING_PARAMETER:
+-			return "Paramter is missing";
++			return "Parameter is missing";
+ 		case DTP92_CALIBRATION_DENIED:
+ 			return "Invalid calibration enable code";
+ 		case DTP92_NEEDS_OFFSET_CAL:
+ 			return "Offset calibration checksum failed";
+--- a/spectro/hidio.c
++++ b/spectro/hidio.c
+@@ -744,9 +744,9 @@
+ #if defined(NT)
+ 	{
+ 		unsigned char *rbuf2;
+ 
+-		/* Create a copy of the data recieved with one more byte */
++		/* Create a copy of the data received with one more byte */
+ 		if ((rbuf2 = malloc(bsize + 1)) == NULL) {
+ 			a1loge(p->log, ICOM_SYS, "icoms_hid_read: malloc failed\n");
+ 			return ICOM_SYS;
+ 		}
+--- a/spectro/huey.c
++++ b/spectro/huey.c
+@@ -81,9 +81,9 @@
+ 
+ /* i1Display command codes */
+ /* B = byte (8bit), S = short (16bit), W = word (32bit), A = string */
+ /* U = unused byte, - = no arguments/results */
+-/* The is a 7 byte command buffer and 6 response recieve buffer. */
++/* The is a 7 byte command buffer and 6 response receive buffer. */
+ /* :2 means the read is from a second 8 byte ep x81 read. */
+ /* cbuf[-] is command byte */
+ /* rbuf[-2] is continuation byte */
+ /* rbuf[-1] is echo of command byte */
+--- a/spectro/i1pro_imp.c
++++ b/spectro/i1pro_imp.c
+@@ -2828,9 +2828,9 @@
+ 		if (samp[i].tot > thr)
+ 			break;
+ 	}
+ 
+-	a1logd(p->log, 2, "i1pro_meas_delay: stoped at sample %d time %f\n",i,samp[i].sec);
++	a1logd(p->log, 2, "i1pro_meas_delay: stopped at sample %d time %f\n",i,samp[i].sec);
+ 
+ 	/* Compute overall delay */
+ 	dispmsec = (int)(samp[i].sec * 1000.0 + 0.5);				/* Display update time */
+ 	instmsec = (int)((m->trigstamp - rstart)/1000.0 + 0.5);		/* Reaction time */
+@@ -3281,9 +3281,9 @@
+ 			m->rpcount++;
+ 		}
+ 	}
+ 	
+-	a1logd(p->log,3,"i1pro_imp_measure sucessful return\n");
++	a1logd(p->log,3,"i1pro_imp_measure successful return\n");
+ 	if (user_trig)
+ 		return I1PRO_USER_TRIG;
+ 	return ev; 
+ }
+@@ -3942,9 +3942,9 @@
+ 				return I1PRO_OK;
+ 			}
+ 		}
+ 	} else {
+-		a1logd(p->log, 3, "Not enough tries suceeded to determine refresh rate\n");
++		a1logd(p->log, 3, "Not enough tries succeeded to determine refresh rate\n");
+ 	}
+ 
+ 	return I1PRO_RD_NOREFR_FOUND; 
+ }
+@@ -4037,9 +4037,9 @@
+ 		m->nsen = o_nsen;
+ 		return I1PRO_OK;
+ 	}
+ 
+-	/* We've sucessfully restored the dark calibration */
++	/* We've successfully restored the dark calibration */
+ 	s->dark_valid = 1;
+ 	s->ddate = m->caldate;
+ 
+ 	/* Get the white calibration data */
+@@ -4082,9 +4082,9 @@
+ 		a1logd(p->log,2,"i1pro_compute_white_cal failed to convert EEProm data to calibration\n");
+ 		return I1PRO_OK;
+ 	}
+ 
+-	/* We've sucessfully restored the calibration */
++	/* We've successfully restored the calibration */
+ 	s->cal_valid = 1;
+ 	s->cfdate = m->caldate;
+ 
+ 	return I1PRO_OK;
+@@ -4438,9 +4438,9 @@
+ 		write_doubles(&x, fp, s->idark_data[2]-1, m->nraw+1);
+ 		write_doubles(&x, fp, s->idark_data[3]-1, m->nraw+1);
+ 	}
+ 
+-	a1logd(p->log,3,"nbytes = %d, Checkum = 0x%x\n",x.nbytes,x.chsum);
++	a1logd(p->log,3,"nbytes = %d, Checksum = 0x%x\n",x.nbytes,x.chsum);
+ 	write_ints(&x, fp, (int *)&x.chsum, 1);
+ 
+ 	if (fclose(fp) != 0)
+ 		x.ef = 2;
+--- a/spectro/madvrwin.c
++++ b/spectro/madvrwin.c
+@@ -610,9 +610,9 @@
+ 		madvrwin_set_color(p, p->rgb[0], p->rgb[1], p->rgb[2]);
+ 	}
+ #endif
+ 
+-	debugr("new_madvrwin: return sucessfully\n");
++	debugr("new_madvrwin: return successfully\n");
+ 
+ 	return p;
+ }
+ 
+--- a/spectro/ss.c
++++ b/spectro/ss.c
+@@ -375,9 +375,9 @@
+ #endif
+ 
+ 	p->gotcoms = 1;
+ 
+-	a1logd(p->log, 2, "ss_init_coms: init coms has suceeded\n");
++	a1logd(p->log, 2, "ss_init_coms: init coms has succeeded\n");
+ 
+ 	return inst_ok;
+ }
+ 
+@@ -1658,9 +1658,9 @@
+ 			return "Hardware failure";
+ 		case ss_et_FilterOutOfPos:
+ 			return "Filter wheel out of position";
+ 		case ss_et_SendTimeout:
+-			return "Data transmission timout";
++			return "Data transmission timeout";
+ 		case ss_et_DriveError:
+ 			return "Data drive defect";
+ 		case ss_et_MeasDisabled:
+ 			return "Measuring disabled";
+@@ -1778,9 +1778,9 @@
+ 			return "Message received from instrument is badly formatted";
+ 		case ss_et_BadHexEncoding:
+ 			return "Message received from instrument has bad Hex encoding";
+ 		case ss_et_RecBufferOverun:
+-			return "Message received from instrument would overflow recieve buffer";
++			return "Message received from instrument would overflow receive buffer";
+ 		default:
+ 			return "Unknown error code";
+ 	}
+ }
+--- a/spectro/ss_imp.c
++++ b/spectro/ss_imp.c
+@@ -216,9 +216,9 @@
+ 		p->snerr = ss_et_BadHexEncoding;
+ 	return 0;
+ }
+ 
+-/* Return the first enum from the recieve buffer without removing it. */
++/* Return the first enum from the receive buffer without removing it. */
+ int ss_peek_ans(ss *p) {
+ 	int rv;
+ 
+ 	if (chrspace(p, 2))
+--- a/spectro/webwin.c
++++ b/spectro/webwin.c
+@@ -411,9 +411,9 @@
+ 	while(p->ccix == 0) {
+ 		msec_sleep(50);
+ 	}
+ 
+-	debugr("new_webwin: return sucessfully\n");
++	debugr("new_webwin: return successfully\n");
+ 
+ 	return p;
+ }
+ 
+--- a/xicc/cv.c
++++ b/xicc/cv.c
+@@ -101,9 +101,9 @@
+ 		np = 1;
+ 
+ 	printf("There are %d parameters:\n",np); fflush(stdout);
+ 	for (i = 0; i < np; i++) {
+-		printf("Paramter %d = %f\n",i, params[i]); fflush(stdout);
++		printf("Parameter %d = %f\n",i, params[i]); fflush(stdout);
+ 	}
+ 
+ 	/* Display the result */
+ 	for (i = 0; i < XRES; i++) {
+--- a/spectro/ss_imp.h
++++ b/spectro/ss_imp.h
+@@ -722,9 +722,9 @@
+ 
+ /* - - - - - - - - - - - - - - - - - - - - - */
+ /* ANSWER: */
+ 
+-/* Return the first enum from the recieve buffer without removing it. */
++/* Return the first enum from the receive buffer without removing it. */
+ int ss_peek_ans(struct _ss *p);
+ 
+ /* Remove a Spectrolino answer enum from the revieve buffer, */
+ /* and check it is correct.  */
+--- a/imdi/cctiff.c
++++ b/imdi/cctiff.c
+@@ -35,9 +35,9 @@
+ 	embedding them in the outgoing TIFF.
+ 	Add flag to ignore inkname mismatches.
+ 
+ 
+-	Should add support for transfering any extra alpha
++	Should add support for transferring any extra alpha
+ 	planes from input to output, rather than simply ignoring them.
+ 
+ 
+ 	Question: Should this be changed to also function as
+@@ -1951,13 +1951,13 @@
+ 		}
+ 
+ 		if (wh != NULL) {
+ 			printf("Output TIFF file '%s'\n",out_name);
+-			printf("Ouput raster file ICC colorspace is %s\n",icm2str(icmColorSpaceSignature,su.outs));
++			printf("Output raster file ICC colorspace is %s\n",icm2str(icmColorSpaceSignature,su.outs));
+ 			printf("Output TIFF file photometric is %s\n",Photometric2str(wphotometric));
+ 		} else {
+ 			printf("Output JPEG file '%s'\n",out_name);
+-			printf("Ouput raster file ICC colorspace is %s\n",icm2str(icmColorSpaceSignature,su.outs));
++			printf("Output raster file ICC colorspace is %s\n",icm2str(icmColorSpaceSignature,su.outs));
+ 			printf("Output JPEG file colorspace is %s\n",JPEG_cspace2str(wj.jpeg_color_space));
+ 			if (wdesc != NULL)
+ 				printf("Output raster file description: '%s'\n",wdesc);
+ 		}
+--- a/imdi/imdi.h
++++ b/imdi/imdi.h
+@@ -37,9 +37,9 @@
+ 	/* Output pointers and data must only reference non-skipped output channels. */
+ 
+ 	/* Note that once an imdi is created, multiple can call interp() without */
+ 	/* interfering with each other, allowing parallel execution. */
+-	void (*interp)(struct _imdi *s, void **outp, int outst,		/* Ouput pointers and stride */
++	void (*interp)(struct _imdi *s, void **outp, int outst,		/* Output pointers and stride */
+ 	                                void **inp, int inst,		/* Input pointers and stride */
+ 	                                unsigned int npixels);		/* Number of pixels */
+ 
+ 	/* Return some information about the imdi */
+--- a/spectro/munki_imp.c
++++ b/spectro/munki_imp.c
+@@ -1903,9 +1903,9 @@
+ 		if (samp[i].tot > thr)
+ 			break;
+ 	}
+ 
+-	a1logd(p->log, 2, "munki_meas_delay: stoped at sample %d time %f\n",i,samp[i].sec);
++	a1logd(p->log, 2, "munki_meas_delay: stopped at sample %d time %f\n",i,samp[i].sec);
+ 
+ 	/* Compute overall delay and subtract patch change delay */
+ 	dispmsec = (int)(samp[i].sec * 1000.0 + 0.5);
+ 	instmsec = (int)((m->trigstamp - rstart)/1000.0 + 0.5);
+@@ -2384,9 +2384,9 @@
+ 
+ 	if (nvals > 0)
+ 		vals[0].duration = duration;	/* Possible flash duration */
+ 	
+-	a1logd(p->log,3,"munki_imp_measure sucessful return\n");
++	a1logd(p->log,3,"munki_imp_measure successful return\n");
+ 	if (user_trig)
+ 		return MUNKI_USER_TRIG;
+ 	return ev; 
+ }
+@@ -3044,9 +3044,9 @@
+ 				return MUNKI_OK;
+ 			}
+ 		}
+ 	} else {
+-		a1logd(p->log, 3, "Not enough tries (%d) suceeded to determine refresh rate\n",tix);
++		a1logd(p->log, 3, "Not enough tries (%d) succeeded to determine refresh rate\n",tix);
+ 	}
+ 
+ 	return MUNKI_RD_NOREFR_FOUND; 
+ }
+@@ -3259,9 +3259,9 @@
+ 		write_doubles(&x, fp, s->idark_data[2]-1, m->nraw+1);
+ 		write_doubles(&x, fp, s->idark_data[3]-1, m->nraw+1);
+ 	}
+ 
+-	a1logd(p->log,3,"Checkum = 0x%x\n",x.chsum);
++	a1logd(p->log,3,"Checksum = 0x%x\n",x.chsum);
+ 	write_ints(&x, fp, (int *)&x.chsum, 1);
+ 
+ 	if (fclose(fp) != 0)
+ 		x.ef = 2;
+@@ -6414,9 +6414,9 @@
+ 	munkiimp *m = (munkiimp *)p->m;
+ 	int i, j, jj, k, cx, sx;
+ 	munki_fc coeff[40][16];	/* Existing filter cooefficients */
+ 	int nwav1;					/* Number of filters */
+-	double wl_short1, wl_long1;	/* Ouput wavelength of first and last filters */
++	double wl_short1, wl_long1;	/* Output wavelength of first and last filters */
+ 	double wl_step1;
+ 	munki_xp xp[41];			/* Crossover points each side of filter */
+ 	munki_code ev = MUNKI_OK;
+ 	rspl *raw2wav;				/* Lookup from CCD index to wavelength */
+@@ -8734,9 +8734,9 @@
+ #endif
+ 
+ 	top = extra + m->c_inttime * nmeas;
+ 
+-	a1logd(p->log,2,"munki_readmeasurement: inummeas %d, scanflag %d, address %p bsize 0x%x, timout %f\n",inummeas, scanflag, buf, bsize, top);
++	a1logd(p->log,2,"munki_readmeasurement: inummeas %d, scanflag %d, address %p bsize 0x%x, timeout %f\n",inummeas, scanflag, buf, bsize, top);
+ 
+ 	for (;;) {
+ 		int size;		/* number of bytes to read */
+ 
+--- a/target/printtarg.c
++++ b/target/printtarg.c
+@@ -344,9 +344,9 @@
+ 			fprintf(s->of,"%f setcolor\n",cdev[0]);
+ 		} else if (c->altrep == 6) {	/* DeviceN */
+ 			gen_ncolor(s, c);
+ 		} else {
+-			error("Device white encoding not approproate!");
++			error("Device white encoding not appropriate!");
+ 		}
+ 
+ 	} else if (c->nmask == ICX_K) {
+ 		if ((c->t & T_PRESET) == 0)
+@@ -361,9 +361,9 @@
+ 			fprintf(s->of,"%f setcolor\n",cdev[0]);
+ 		} else if (c->altrep == 3) {	/* DeviceN */
+ 			gen_ncolor(s, c);
+ 		} else {
+-			error("Device black encoding not approproate!");
++			error("Device black encoding not appropriate!");
+ 		}
+ 
+ 	} else if (c->nmask == ICX_CMY) {
+ 		if ((c->t & T_PRESET) == 0)
+@@ -376,9 +376,9 @@
+ 			fprintf(s->of,"%f %f %f setrgbcolor\n",1.0-cdev[0],1.0-cdev[1],1.0-cdev[2]);
+ 		} else if (c->altrep == 8) {	/* DeviceN */
+ 			gen_ncolor(s, c);
+ 		} else {
+-			error("Device CMY encoding not approproate!");
++			error("Device CMY encoding not appropriate!");
+ 		}
+ 
+ 	} else if (c->nmask == ICX_RGB || c->nmask == ICX_IRGB) {
+ 		if ((c->t & T_PRESET) == 0)
+@@ -748,9 +748,9 @@
+ 			s->c[0] = cdev[0];
+ 		} else if (c->altrep == 6) {	/* DeviceN single channel */
+ 			s->c[0] = cdev[0];
+ 		} else {
+-			error("Device white encoding not approproate!");
++			error("Device white encoding not appropriate!");
+ 		}
+ 
+ 	} else if (c->nmask == ICX_K) {
+ 		if (c->altrep == 0) {	/* DeviceGray */
+@@ -764,9 +764,9 @@
+ 			s->c[0] = cdev[0];
+ 		} else if (c->altrep == 3) {	/* DeviceN single channel */
+ 			s->c[0] = cdev[0];
+ 		} else {
+-			error("Device black encoding not approproate!");
++			error("Device black encoding not appropriate!");
+ 		}
+ 
+ 	} else if (c->nmask == ICX_CMY) {
+ 		if (c->altrep == 0) {			/* DeviceCMYK */
+@@ -782,9 +782,9 @@
+ 			s->c[0] = cdev[0];
+ 			s->c[1] = cdev[1];
+ 			s->c[2] = cdev[2];
+ 		} else {
+-			error("Device CMY encoding not approproate!");
++			error("Device CMY encoding not appropriate!");
+ 		}
+ 
+ 	} else {
+ 		int j;
+@@ -967,9 +967,9 @@
+ 			csp = ncol_2d;
+ 			nc = icx_noofinks(nmask);
+ 			nc = 1;
+ 		} else {
+-			error("Device white encoding not approproate");
++			error("Device white encoding not appropriate");
+ 		}
+ 
+ 	} else if (nmask == ICX_K) {
+ 		if (altrep == 0				/* DeviceGray */
+@@ -983,9 +983,9 @@
+ 			csp = ncol_2d;
+ 			nc = icx_noofinks(nmask);
+ 			nc = 1;
+ 		} else {
+-			error("Device black encoding not approproate");
++			error("Device black encoding not appropriate");
+ 		}
+ 
+ 	} else if (nmask == ICX_RGB || nmask == ICX_IRGB) {
+ 		csp = rgb_2d;
+@@ -1001,9 +1001,9 @@
+ 		} else if (altrep == 8) {	/* DeviceN three channel */
+ 			csp = ncol_2d;
+ 			nc = icx_noofinks(nmask);
+ 		} else {
+-			error("Device CMY encoding not approproate");
++			error("Device CMY encoding not appropriate");
+ 		}
+ 
+ 	} else if (nmask == ICX_CMYK) {
+ 		csp = cmyk_2d;
+@@ -2227,9 +2227,9 @@
+ 		pglth = 5.0;			/* Page Label text height */
+ 
+ 
+ 	} else {
+-		error("Unsupported intrument type");
++		error("Unsupported instrument type");
+ 	}
+ 	
+ 	/* Compute page limits */
+ 	x1 = bord + lbord;	/* Bounding box in mm */
+@@ -2273,9 +2273,9 @@
+ 
+ 	tidpad = (pprow - tidminp)/2;	/* Center TID */
+ 
+ 	if (pprow < (1+nextrap))
+-		error("Paper size not long enought for a single patch per row!");
++		error("Paper size not long enough for a single patch per row!");
+ 
+ 	*ptpprow = tpprow = pprow - nextrap;	/* Test sample patches per row */
+ 
+ 	tidnpat = npat + (tidrows * tpprow);	/* Total patches including TID row, but not max/min/sid */
+@@ -2972,9 +2972,9 @@
+ 	double pscale = 1.0;	/* Patch size scale */
+ 	double sscale = 1.0;	/* Spacer size scale */
+ 	int rand = 1;
+ 	int qbits = 0;			/* Quantization bits */
+-	int oft = 0;			/* Ouput File type, 0 = PS, 1 = EPS , 2 = TIFF */
++	int oft = 0;			/* Output File type, 0 = PS, 1 = EPS , 2 = TIFF */
+ 	int nocups = 0;			/* Supress CUPS PS/EPS job ticket */
+ 	depth2d tiffdpth = bpc8_2d;	/* TIFF pixel depth */
+ 	double tiffres = 100.0;	/* TIFF resolution in DPI */
+ 	int ncha = 0;			/* flag, use nchannel alpha */
+--- a/gamut/nearsmth.c
++++ b/gamut/nearsmth.c
+@@ -262,9 +262,9 @@
+ 	double a_o;
+ 	double va, vr, vd, vv = 0.0;
+ 
+ 	/* Absolute, Delta E^2 between test point and destination closest */
+-	/* aodv is already positioned acording to the LCh weights, */
++	/* aodv is already positioned according to the LCh weights, */
+ 	/* so weight as per average of these */
+ 	a_o = w->a.o;
+ 	va = wdesq(dtp, aodv, a_o, a_o, a_o, SUM_POW);
+ 
+@@ -4066,9 +4066,9 @@
+ 	}
+ 	swdiag = new_rspl(RSPL_NOFLAGS, 3, 3);	/* Allocate 3D -> 3D */
+ 	swdiag->fit_rspl(swdiag, RSPL_NOFLAGS, fpnts, nmpts, NULL, NULL, gres, NULL, NULL, 1.0, avgdev, NULL);
+ 
+-	/* Now create a plot of the sci_gam with the vertexes colored acording to the */
++	/* Now create a plot of the sci_gam with the vertexes colored according to the */
+ 	/* diagnostic map. */
+ 	if ((wrl = new_vrml("sci_gam_wt", 1, vrml_lab)) == NULL) {
+ 		fprintf(stderr,"gamut map: new_vrml failed for '%s%s'\n","sci_gam_wt",vrm_ext());
+ 		swdiag->del(swdiag);
+--- a/gamut/nearsmth.h
++++ b/gamut/nearsmth.h
+@@ -293,9 +293,9 @@
+ gammapweights *src2, double wgt2,
+ gammapweights *src3, double wgt3
+ );
+ 
+-/* Tweak weights acording to extra cmy cusp flags or rel override */
++/* Tweak weights according to extra cmy cusp flags or rel override */
+ void tweak_weights(gammapweights out[14], int dst_cmymap, int rel_oride);
+ 
+ #endif /* NEARSMTH_H */
+ 
+--- a/imdi/cctiffo.c
++++ b/imdi/cctiffo.c
+@@ -306,9 +306,9 @@
+ 			return "CIELog2L";
+ 		case PHOTOMETRIC_LOGLUV:
+ 			return "CIELog2Luv";
+ 	}
+-	sprintf(buf,"Unknonw Tag %d",pmtc);
++	sprintf(buf,"Unknown Tag %d",pmtc);
+ 	return buf;
+ }
+ 
+ /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+--- a/imdi/greytiff.c
++++ b/imdi/greytiff.c
+@@ -130,9 +130,9 @@
+ 			return "CIELog2L";
+ 		case PHOTOMETRIC_LOGLUV:
+ 			return "CIELog2Luv";
+ 	}
+-	sprintf(buf,"Unknonw Tag %d",pmtc);
++	sprintf(buf,"Unknown Tag %d",pmtc);
+ 	return buf;
+ }
+ 
+ /* Callbacks used to initialise imdi */
+--- a/link/collink.c
++++ b/link/collink.c
+@@ -4899,9 +4899,9 @@
+ 			}
+ 		}
+ 
+ 		if (li.verb)
+-			printf("Finished verfication\n");
++			printf("Finished verification\n");
+ 
+ 		printf("Average error = %f%%, peak error = %f%%\n",aerr * 100.0/nerr, perr * 100.0);
+ 		printf("Input %f %f %f %f\n",pin[0], pin[1], pin[2], pin[3]);
+ 		printf("Output %f %f %f %f\n",pout[0], pout[1], pout[2], pout[3]);
+--- a/profile/printcal.c
++++ b/profile/printcal.c
+@@ -1293,9 +1293,9 @@
+ 				wp = &pvals[j][i];
+ 				icmXYZ2Lab(&wht, wp->Lab, wp->XYZ);
+ 			}
+ 
+-			/* Sort the channel acording to device value */ 
++			/* Sort the channel according to device value */
+ 			/* For a consistent result for identical device values, */
+ 			/* secondary sort by inverse CIE value */
+ //#define HEAP_COMPARE(A,B) ((A).dev < (B).dev)
+ #define HEAP_COMPARE(A,B) ((A).dev != (B).dev ? ((A).dev < (B).dev) : ((A).Lab[0] > (B).Lab[0])) 
+--- a/spectro/dispsup.c
++++ b/spectro/dispsup.c
+@@ -744,9 +744,9 @@
+ 		/* We only fall through with a valid reading */
+ 		scb->serno = p->serno++;
+ 		scb->msec = msec_time();
+ 
+-		a1logd(p->log,1, "got reading %f %f %f, transfering to col\n",
++		a1logd(p->log,1, "got reading %f %f %f, transferring to col\n",
+ 		                val.XYZ[0], val.XYZ[1], val.XYZ[2]);
+ 
+ 		scb->mtype = val.mtype;
+ 		scb->mcond = val.mcond;
+@@ -1265,9 +1265,9 @@
+ 		trigmode = inst_opt_trig_user;
+ 
+ 	/* Or something is wrong with instrument capabilities */
+ 	} else {
+-		printf("No reasonable trigger mode avilable for this instrument\n");
++		printf("No reasonable trigger mode available for this instrument\n");
+ 		return 2;
+ 	}
+ 
+ 	if ((rv = p->it->get_set_opt(p->it, trigmode)) != inst_ok) {
+@@ -2395,9 +2395,9 @@
+ 
+ 	/* Reset key meanings */
+ 	inst_reset_uih();
+ 
+-	a1logd(p->log,1,"config_inst_displ suceeded\n");
++	a1logd(p->log,1,"config_inst_displ succeeded\n");
+ 	return 0;
+ }
+ 
+ /* Create a display reading object. */
+--- a/gamut/gammap.c
++++ b/gamut/gammap.c
+@@ -860,9 +860,9 @@
+ 			}
+ #endif
+ 			if (gmi->bph == gmm_clipBP) {
+ 
+-				/* Extend the target black point to accomodate the */
++				/* Extend the target black point to accommodate the */
+ 				/* bent or clipped destination space L* range */
+ 				if (fabp[0] < dr_cs_bp[0]) {
+ 					t = (fabp[0] - dr_cs_wp[0])/(dr_cs_bp[0] - dr_cs_wp[0]);
+ 					for (j = 0; j < 3; j++)
+--- a/profile/profout.c
++++ b/profile/profout.c
+@@ -1110,9 +1110,9 @@
+ 	if (isdisp && allintents) {
+ 		if (iccver < icmVersion2_4) {
+ 			iccver = icmVersion2_4;		/* Need 2.4.0 for Display intents */
+ 			if (verb)
+-				fprintf(verbo,"Bumped ICC version to 2.4.0 to accomodate multiple Display intents\n");
++				fprintf(verbo,"Bumped ICC version to 2.4.0 to accommodate multiple Display intents\n");
+ 		}
+ 	}
+ 	if (wr_icco->set_version(wr_icco, iccver) != 0)
+ 		error("set_version failed: %d, %s",wr_icco->errc,wr_icco->err);
+--- a/render/thscreen.c
++++ b/render/thscreen.c
+@@ -635,9 +635,9 @@
+ 	/* over to cross all the thresholds evenly. */
+ 	mrang = 65535.0/(t->oelev - 1.0); 
+ 	DBG(("new_thscreen() raw modulation rande = %f\n",mrang));
+ 
+-	/* Modify the modulation range to accomodate any level overlap */
++	/* Modify the modulation range to accommodate any level overlap */
+ 	if (olap > 0.0 && t->oelev > 2) {
+ 		mrang = ((t->oelev - 2.0) * olap * mrang + 65535.0)/(t->oelev - 1.0);
+ 		DBG(("new_thscreen() modulation adjusted for overlap = %f\n",mrang));
+ 	}
+--- a/xicc/xspect.c
++++ b/xicc/xspect.c
+@@ -4592,9 +4592,9 @@
+ 
+ /* Given an emission spectrum, set the UV output to the given level. */
+ /* The shape of the UV is taken from FWA1_stim, and the level is */
+ /* with respect to the Y of the input spectrum. */
+-/* The output range is extended to accomodate the UV wavelengths */
++/* The output range is extended to accommodate the UV wavelengths */
+ void xsp_setUV(xspect *out, xspect *in, double uvlevel) {
+ 	int i, xs, xe;
+ 	double ww, avg;
+ 	xspect cin;				/* Copy of in */
+--- a/spectro/ccxxmake.c
++++ b/spectro/ccxxmake.c
+@@ -412,9 +412,9 @@
+ 
+ 			/* COM port  */
+ 			} else if (argv[fa][1] == 'c') {
+ 				fa = nfa;
+-				if (na == NULL) usage(uflag | 0,"Paramater expected following -c");
++				if (na == NULL) usage(uflag | 0,"Parameter expected following -c");
+ 				comno = atoi(na);
+ 				if (comno < 1 || comno > 40) usage(uflag | 0,"-c parameter %d out of range",comno);
+ 
+ 			/* Telephoto */
+@@ -535,9 +535,9 @@
+ 
+ 			/* Serial port flow control */
+ 			} else if (argv[fa][1] == 'W') {
+ 				fa = nfa;
+-				if (na == NULL) usage(uflag | 0,"Paramater expected following -W");
++				if (na == NULL) usage(uflag | 0,"Parameter expected following -W");
+ 				if (na[0] == 'n' || na[0] == 'N')
+ 					fc = fc_None;
+ 				else if (na[0] == 'h' || na[0] == 'H')
+ 					fc = fc_Hardware;
+@@ -624,9 +624,9 @@
+ 	if (strrchr(outname, '.') == NULL)	/* no extension */
+ 		strcat(outname, doccss ? ".ccss" : ".ccmx");
+ 
+ 	if (fakeseq && doccss)
+-		error("Fake CCSS test not implemeted");
++		error("Fake CCSS test not implemented");
+ 
+ 	printf("\n");
+ 
+ 	if (dtinfo == NULL)
+@@ -843,9 +843,9 @@
+ 						refs[i][1] = cols[i][1];
+ 						refs[i][2] = cols[i][2];
+ 					}
+ 					gotref = 1;
+-					warning("Got two colorimetric files - assuming '%s' is the refrence",innames[0]);
++					warning("Got two colorimetric files - assuming '%s' is the reference",innames[0]);
+ 					refrmode = -1;
+ 					cbid = 0;
+ 
+ 					if (spec) {
+--- a/spectro/dispread.c
++++ b/spectro/dispread.c
+@@ -425,9 +425,9 @@
+ 
+ 			/* COM port  */
+ 			} else if (argv[fa][1] == 'c') {
+ 				fa = nfa;
+-				if (na == NULL) usage(0,"Paramater expected following -c");
++				if (na == NULL) usage(0,"Parameter expected following -c");
+ 				comport = atoi(na);
+ 				if (comport < 1 || comport > 50) usage(0,"-c parameter %d out of range",comport);
+ 
+ 			/* Telephoto */
+--- a/spectro/fakeread.c
++++ b/spectro/fakeread.c
+@@ -814,9 +814,9 @@
+ 			error("get output ICC lookup object failed: %d, %s",oicco->errc,oicco->err);
+ 
+ 		/* We're assuming that the input space has a perfect black point... */
+ 
+-		/* Lookup the ouput black point in XYZ PCS. We're assuming monotonicity.. */
++		/* Lookup the output black point in XYZ PCS. We're assuming monotonicity.. */
+ 		bp[0] = bp[1] = bp[2] = 0.0;
+ 		oluo->lookup(oluo, bp, bp);
+ 
+ 		/* Done with output profile */
+@@ -827,9 +827,9 @@
+ 		bt1886_setup(&bt, &lu->pcswht, bp, outoprop,
+ 		             bt1886 == 1 ? egamma : tgamma, bt1886 == 1 ? 1 : 0);
+ 
+ 		if (verb)
+-			printf("Gamma Curve: Using ouput black offset proportion %f\n",outoprop);
++			printf("Gamma Curve: Using output black offset proportion %f\n",outoprop);
+ 
+ 		if (bt1886 == 1) {		/* Using effective gamma */
+ 			if (verb)
+ 				printf("Gamma Curve: Technical gamma %f used to achieve effective gamma %f\n",
+@@ -980,18 +980,18 @@
+ 				gfudge = 1;
+ 			else if (nmask == ICX_K && sep_ins == icSigCmykData)
+ 				gfudge = 2;
+ 			else if (icx_colorant_comb_match_icc(nmask, sep_ins) == 0) {
+-				error("Separation ICC device space '%s' dosen't match TI1 '%s'",
++				error("Separation ICC device space '%s' doesn't match TI1 '%s'",
+ 				       icm2str(icmColorSpaceSignature, sep_ins),
+ 				       ident);	/* Should free(). */
+ 			}
+ 
+ 			/* Check if separation ICC output is compatible with ICC/MPP/TI3 conversion */ 
+ 			if (icc_luo != NULL) {
+ 				/* Check if icc is compatible with .ti1 */
+ 				if (sep_outs != ins)
+-					error("ICC device space '%s' dosen't match Separation ICC '%s'",
++					error("ICC device space '%s' doesn't match Separation ICC '%s'",
+ 					       icm2str(icmColorSpaceSignature, ins),
+ 					       icm2str(icmColorSpaceSignature, sep_outs));
+ 			} else if (mlu != NULL) {
+ 				/* Check if mpp is compatible with .ti1 */
+@@ -1014,14 +1014,14 @@
+ 				gfudge = 2;		/* Should allow for other colorant combo's that include black */
+ 			else {
+ 				if (!revlookup) {
+ 					if (icx_colorant_comb_match_icc(nmask, ins) == 0)
+-						error("ICC device space '%s' dosen't match TI1 '%s'",
++						error("ICC device space '%s' doesn't match TI1 '%s'",
+ 						       icm2str(icmColorSpaceSignature, ins),
+ 						       ident);	// Should free().
+ 				} else {
+ 					if (icx_colorant_comb_match_icc(nmask, outs) == 0)
+-						error("ICC device space '%s' dosen't match TI1 '%s'",
++						error("ICC device space '%s' doesn't match TI1 '%s'",
+ 						       icm2str(icmColorSpaceSignature, ins),
+ 						       ident);	// Should free().
+ 
+ 				}
+--- a/profile/invprofcheck.c
++++ b/profile/invprofcheck.c
+@@ -97,9 +97,9 @@
+ 	fprintf(stderr," -c           Show CIE94 delta E values\n");
+ 	fprintf(stderr," -k           Show CIEDE2000 delta E values\n");
+ 	fprintf(stderr," -w           create %s visualisation (profile%s)\n",vrml_format(),vrml_ext());
+ 	fprintf(stderr," -x           Use %s axes\n",vrml_format());
+-	fprintf(stderr," -e           Color vectors acording to delta E\n");
++	fprintf(stderr," -e           Color vectors according to delta E\n");
+ 	fprintf(stderr," profile.icm  Profile to check\n");
+ 	exit(1);
+ }
+ 
+--- a/profile/profcheck.c
++++ b/profile/profcheck.c
+@@ -58,9 +58,9 @@
+ 	fprintf(stderr," -k              Show CIEDE2000 delta E values\n");
+ 	fprintf(stderr," -w              create %s visualisation (iccprofile%s)\n",vrml_format(),vrml_ext());
+ 	fprintf(stderr," -x              Use %s axes\n",vrml_format());
+ 	fprintf(stderr," -m              Make %s lines a minimum of 0.5\n",vrml_format());
+-	fprintf(stderr," -e              Color vectors acording to delta E\n");
++	fprintf(stderr," -e              Color vectors according to delta E\n");
+ 	fprintf(stderr," -h              Plot a histogram of delta E's\n");
+ 	fprintf(stderr," -s              Sort output by delta E\n");
+ 	fprintf(stderr," -P N.NN         Create a pruned .ti3 with points less or equal to N.NN delta E\n");
+ 	fprintf(stderr," -d devval1,deval2,devvalN\n");
+--- a/spectro/ccwin.c
++++ b/spectro/ccwin.c
+@@ -838,9 +838,9 @@
+ 		p->del(p);
+ 		return NULL;
+ 	}
+ 
+-	debugr2((errout,"new_ccwin: return sucessfully\n"));
++	debugr2((errout,"new_ccwin: return successfully\n"));
+ 
+ 	return p;
+ }
+ 
+--- a/profile/colverify.c
++++ b/profile/colverify.c
+@@ -68,9 +68,9 @@
+ 	fprintf(stderr," -M              Normalise both files reading to mean white XYZ\n");
+ 	fprintf(stderr," -D              Use D50 100.0 as L*a*b* white reference\n");
+ 	fprintf(stderr," -c              Show CIE94 delta E values\n");
+ 	fprintf(stderr," -k              Show CIEDE2000 delta E values\n");
+-	fprintf(stderr," -h [hist.txt]   Plot a histogram of delta E's [Optionaly save points to .txt]\n");
++	fprintf(stderr," -h [hist.txt]   Plot a histogram of delta E's [Optionally save points to .txt]\n");
+ 	fprintf(stderr," -s              Sort patch values by error\n");
+ 	fprintf(stderr," -w              create PCS %s vector visualisation (measured%s)\n",vrml_format(),vrml_ext());
+ 	fprintf(stderr," -W              create PCS %s marker visualisation (measured%s)\n",vrml_format(),vrml_ext());
+ 	fprintf(stderr," -d              create Device RGB %s marker visualisation (measured%s)\n",vrml_format(),vrml_ext());
+--- a/spectro/ex1.c
++++ b/spectro/ex1.c
+@@ -188,9 +188,9 @@
+ 	}
+ 
+ 	p->gotcoms = 1;
+ 
+-	a1logd(p->log, 2, "ex1_init_coms: init coms has suceeded\n");
++	a1logd(p->log, 2, "ex1_init_coms: init coms has succeeded\n");
+ 
+ 	return inst_ok;
+ }
+ 
+@@ -942,9 +942,9 @@
+ 			return "HW rev. is incompatible with firmware";
+ 		case EX1_FLASH_MAP:
+ 			return "Flash map is incompatible with firmware";
+ 		case EX1_DEFERRED:
+-			return "Operation/Response deffered";
++			return "Operation/Response deferred";
+ 		default:
+ 			return NULL;
+ 	}
+ }
+@@ -1293,9 +1293,9 @@
+ 	calf_wtime_ts(&x, &p->iddate, 1);
+ 	calf_wrspec(&x, p->sconf.idark[0]);
+ 	calf_wrspec(&x, p->sconf.idark[1]);
+ 
+-	a1logd(p->log,3,"nbytes = %d, Checkum = 0x%x\n",x.nbytes,x.chsum);
++	a1logd(p->log,3,"nbytes = %d, Checksum = 0x%x\n",x.nbytes,x.chsum);
+ 	calf_wints(&x, (int *)(&x.chsum), 1);
+ 
+ 	if (calf_done(&x))
+ 		x.ef = 3;
+@@ -1480,9 +1480,9 @@
+ 		a1logd(p->log, 0, "   Request for acknowldgement\n");
+ 	if (flags & EX1_FLAG_NACK)
+ 		a1logd(p->log, 0, "   Negative acknowldgement response\n");
+ 	if (flags & EX1_FLAG_EXPTN)
+-		a1logd(p->log, 0, "   Exception occured\n");
++		a1logd(p->log, 0, "   Exception occurred\n");
+ 	if (flags & EX1_FLAG_PVDEP)
+ 		a1logd(p->log, 0, "   Protocol version is deprecated request\n");
+ 
+ 	merrno = read_ORD16_le(buf + 6);
+@@ -1766,9 +1766,9 @@
+ 		goto done;
+ 	}
+ 
+ 	if (p->log->debug >= 8) { 
+-		a1logd(p->log,1,"\nex1_command: RECIEVING:\n");
++		a1logd(p->log,1,"\nex1_command: RECEIVING:\n");
+ 		dump_command(p, buf, rwbytes, p->log->debug);
+ 	}
+ 
+ 	if (rwbytes != 64) {
+--- a/ccast/ccmes.c
++++ b/ccast/ccmes.c
+@@ -84,9 +84,9 @@
+ 		case ccmessv_closed:
+ 			return "ccmes: connection has been closed";
+ 	}
+ 
+-	return "Uknown ccmessv error";
++	return "Unknown ccmessv error";
+ }
+ 
+ #if defined(LOWVERBTRACE) || defined(DEBUG)
+ static void mes_dump(ccmes *mes, char *pfx) {
+--- a/ccast/ccpacket.c
++++ b/ccast/ccpacket.c
+@@ -132,9 +132,9 @@
+ 		case ccpacket_recv:
+ 			return "Packet: failed to read message";
+ 	}
+ 
+-	return "Uknown ccpacket error";
++	return "Unknown ccpacket error";
+ }
+ 
+ /* Establish an ccpacket connection - implementation */
+ static ccpacket_err connect_ccpacket_imp(
+@@ -194,15 +194,15 @@
+ 		tv = 2000;
+ #endif
+ 		if ((rv = setsockopt(p->sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv,
+ 			                                                   sizeof(tv))) < 0) {
+-			DBG((g_log,0,"setsockopt timout failed with %d, errno %d",rv,ERRNO))
++			DBG((g_log,0,"setsockopt timeout failed with %d, errno %d",rv,ERRNO))
+ 			return ccpacket_connect;
+ 		}
+ 		tv = 2000;
+ 		if ((rv = setsockopt(p->sock, SOL_SOCKET, SO_SNDTIMEO, (const char*)&tv,
+ 			                                                    sizeof(tv))) < 0) {
+-			DBG((g_log,0,"setsockopt timout failed with %d, errno %d",rv,ERRNO))
++			DBG((g_log,0,"setsockopt timeout failed with %d, errno %d",rv,ERRNO))
+ 			return ccpacket_connect;
+ 		}
+ #else
+ 		struct timeval tv;
+@@ -214,16 +214,16 @@
+ 		tv.tv_usec = 0;
+ #endif
+ 		if ((rv = setsockopt(p->sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv,
+ 			                                                    sizeof(tv))) < 0) {
+-			DBG((g_log,0,"setsockopt timout failed with %d, errno %d",rv,ERRNO))
++			DBG((g_log,0,"setsockopt timeout failed with %d, errno %d",rv,ERRNO))
+ 			return ccpacket_connect;
+ 		}
+ 		tv.tv_sec = 2;
+ 		tv.tv_usec = 0;
+ 		if ((rv = setsockopt(p->sock, SOL_SOCKET, SO_SNDTIMEO, (const char*)&tv,
+ 			                                                    sizeof(tv))) < 0) {
+-			DBG((g_log,0,"setsockopt timout failed with %d, errno %d",rv,ERRNO))
++			DBG((g_log,0,"setsockopt timeout failed with %d, errno %d",rv,ERRNO))
+ 			return ccpacket_connect;
+ 		}
+ #endif
+ 
+@@ -231,9 +231,9 @@
+ 		ling.l_onoff = 1;
+ 		ling.l_linger = 2;	/* Two seconds */
+ 		if ((rv = setsockopt(p->sock, SOL_SOCKET, SO_LINGER, (const char*)&ling,
+ 			                                                    sizeof(ling))) < 0) {
+-			DBG((g_log,0,"setsockopt timout failed with %d, errno %d",rv,ERRNO))
++			DBG((g_log,0,"setsockopt timeout failed with %d, errno %d",rv,ERRNO))
+ 			return ccpacket_connect;
+ 		}
+ #endif /* NEVER */
+ 	}
+--- a/spectro/xdg_bds.c
++++ b/spectro/xdg_bds.c
+@@ -880,9 +880,9 @@
+ 			return "memory allocation failed";
+ 		case xdg_nohome:
+ 			return "There is no $HOME";
+ 		case xdg_noalluserprofile:
+-			return "Theres no $ALLUSERSPROFILE is no $ALLUSERSPROFILE";
++			return "There's no $ALLUSERSPROFILE is no $ALLUSERSPROFILE";
+ 		case xdg_nopath:
+ 			return "There is no resulting path";
+ 		case xdg_mallformed:
+ 			return "Malformed path fount";
+--- a/icc/icc.c
++++ b/icc/icc.c
+@@ -1480,9 +1480,9 @@
+ 			return "Video Card Gamma Curve";
+ 		case icSigViewingCondDescTag:
+ 			return "Viewing Condition Description";
+ 		case icSigViewingConditionsTag:
+-			return "Viewing Condition Paramaters";
++			return "Viewing Condition Parameters";
+ 
+ 		/* ArgyllCMS private tag: */
+ 		case icmSigAbsToRelTransSpace:
+ 			return "Absolute to Media Relative Transformation Space matrix";
+@@ -5786,9 +5786,9 @@
+ 			sprintf(icp->err,"icmSetMultiLutTables Tables base icc is different");
+ 			return icp->errc = 1;
+ 		}
+ 		if (pp[tn]->ttype != p->ttype) {
+-			sprintf(icp->err,"icmSetMultiLutTables Tables have different Tage Type");
++			sprintf(icp->err,"icmSetMultiLutTables Tables have different Tag Type");
+ 			return icp->errc = 1;
+ 		}
+ 
+ 		if (pp[tn]->inputChan != p->inputChan) {
+--- a/gamut/isecvol.c
++++ b/gamut/isecvol.c
+@@ -173,9 +173,9 @@
+ 				} else
+ 					inout[i] = 0;
+ 			}
+ 
+-printf("~1 verticies outside = %d\n",nout);
++printf("~1 vertices outside = %d\n",nout);
+ 
+ 			/* If none are in, skip this triangle */
+ 			if (nout == 3)
+ 				continue;
+--- a/gamut/viewgam.c
++++ b/gamut/viewgam.c
+@@ -355,9 +355,9 @@
+ 		if (pp->ntables != 2)
+ 			error("Input file doesn't contain exactly two tables");
+ 
+ 		if ((nverts = pp->t[0].nsets) <= 0)
+-			error("No verticies");
++			error("No vertices");
+ 		if ((ntris = pp->t[1].nsets) <= 0)
+ 			error("No triangles");
+ 
+ 		if ((Lf = pp->find_field(pp, 0, "LAB_L")) < 0)
+--- a/gamut/gamut.c
++++ b/gamut/gamut.c
+@@ -2151,10 +2151,10 @@
+ 		for (i = 0; i < 3; i++) {
+ 			for (j = i+1; j < 3; j++) {
+ 				if (tp->v[i] == tp->v[j]) {
+ 					failed = 1;
+-	printf("Validation failed - duplicate verticies:\n");
+-	printf("Triangle %d, has verticies %d %d %d\n", tp->n, tp->v[0]->n, tp->v[1]->n, tp->v[2]->n);
++	printf("Validation failed - duplicate vertices:\n");
++	printf("Triangle %d, has vertices %d %d %d\n", tp->n, tp->v[0]->n, tp->v[1]->n, tp->v[2]->n);
+ 	fflush(stdout);
+ 				}
+ 			}
+ 		}
+@@ -2164,9 +2164,9 @@
+ 			for (j = i+1; j < 3; j++) {
+ 				if (tp->e[i] == tp->e[j]) {
+ 					failed = 1;
+ 	printf("Validation failed - duplicate connectivity:\n");
+-	printf("Triangle %d, has verticies %d %d %d\n", tp->n, tp->v[0]->n, tp->v[1]->n, tp->v[2]->n);
++	printf("Triangle %d, has vertices %d %d %d\n", tp->n, tp->v[0]->n, tp->v[1]->n, tp->v[2]->n);
+ 	printf("Triangle %d, has edges %d %d %d\n", tp->n, tp->e[0]->n, tp->e[1]->n, tp->e[2]->n);
+ 	fflush(stdout);
+ 				}
+ 			}
+@@ -2186,9 +2186,9 @@
+ 			/* Check that the edges reconing of what index edge it is */
+ 			/* for this triangle is correct */
+ 			if (ei1 != i) {
+ 				failed = 1;
+-	printf("Validation failed - triangle edge index doesn't match record withing edge:\n");
++	printf("Validation failed - triangle edge index doesn't match record within edge:\n");
+ 	printf("Triangle %d, edge index %d edge %d has record %d\n", tp->n, i, e->n, ei1);
+ 	fflush(stdout);
+ 			}
+ 
+@@ -2205,11 +2205,11 @@
+ 			/* Check the verticies for this edge match edge record */
+ 			if ((e->v[0] != tp->v[i] || e->v[1] != tp->v[(i+1) % 3])
+ 			 && (e->v[1] != tp->v[i] || e->v[0] != tp->v[(i+1) % 3])) {
+ 				failed = 1;
+-	printf("Validation failed - edge doesn't have same verticies as triangle expects:\n");
+-	printf("Triangle %d, has verticies %d %d\n", tp->n, tp->v[i]->n, tp->v[(i+1) % 3]->n);
+-	printf("Edge     %d, has verticies %d %d\n", e->n, e->v[0]->n, e->v[1]->n);
++	printf("Validation failed - edge doesn't have same vertices as triangle expects:\n");
++	printf("Triangle %d, has vertices %d %d\n", tp->n, tp->v[i]->n, tp->v[(i+1) % 3]->n);
++	printf("Edge     %d, has vertices %d %d\n", e->n, e->v[0]->n, e->v[1]->n);
+ 	fflush(stdout);
+ 			}
+ 
+ 			t2 = e->t[tei ^ 1];		/* The other triangle */
+@@ -2689,18 +2689,18 @@
+ 			ff[0] = fsz * foffs[i][2] + s->cent[0];
+ 			ff[1] = fsz * foffs[i][0] + s->cent[1];
+ 			ff[2] = fsz * foffs[i][1] + s->cent[2];
+ 			if ((tvs[j++] = expand_gamut(s, ff)) == NULL) {
+-				fprintf(stderr,"gamut: internal error - failed to register a fake initial verticies!\n");
++				fprintf(stderr,"gamut: internal error - failed to register a fake initial vertices!\n");
+ 				exit (-1);
+ 			}
+ 		}
+ 
+ 		s->nofilter = onf;
+ 		s->doingfake = 0;
+ 
+ #ifdef NEVER
+-		printf("Initial verticies:\n");
++		printf("Initial vertices:\n");
+ 		for (i = 0; i < 4; i++) {
+ 			printf(" %d: %f %f %f\n",tvs[i]->n, tvs[i]->p[0], tvs[i]->p[1], tvs[i]->p[2]);
+ 		}
+ #endif
+@@ -6426,9 +6426,9 @@
+ 	}
+ 
+ 
+ 	if ((nverts = gam->t[0].nsets) <= 0) {
+-		fprintf(stderr,"No verticies");
++		fprintf(stderr,"No vertices");
+ 		return 1;
+ 	}
+ 	if ((ntris = gam->t[1].nsets) <= 0) {
+ 		fprintf(stderr,"No triangles");
+--- a/rspl/rev.c
++++ b/rspl/rev.c
+@@ -5877,9 +5877,9 @@
+ 		else
+ 			x->face = 0;
+ 
+ #ifdef DEBUG
+-		printf("Verticies   = ");
++		printf("vertices   = ");
+ 		for (i = 0; i <= sdi; i++)
+ 			printf("%d ",vcmb[i]);
+ 		printf("\n");
+ 		
+@@ -10349,9 +10349,9 @@
+ 				vc.vtxlist = NULL;
+ 				vc.nilist = 0;
+ 				xlist = NULL;
+ 
+-				DBG(("deleting verticies in all bxcells\n"));
++				DBG(("deleting vertices in all bxcells\n"));
+ 
+ 				/* The thinning may have deleted verticies from bxcell's that */
+ 				/* were not involved in the thinning, so go though all bxcells */
+ 				/* to do deletions. Look also for any needed additional surface bxcells. */
+@@ -10489,9 +10489,9 @@
+ 							if (nnshad == 0) {
+ //printf("~1 deleting vtx %d\n",vx->ix);
+ 								del_vtxrec_hash(&vc, vx->ix);
+ 								if (get_vtxrec(&vc, vx->ix) != NULL)
+-									error("get_vtxrec suceeded after del_vtxrec_hash!");
++									error("get_vtxrec succeeded after del_vtxrec_hash!");
+ 							}
+ #else /* !DELETE_SHAD */
+ 							/* Keep track of deleted verticies that are in this bx, */
+ 							/* so we can add back in crossing triangle vertexes */
+@@ -11170,9 +11170,9 @@
+ 						nopreserved++;
+ 				}
+ 			}
+ 			printf("%d crossed triangles tested\n",notverts);
+-			printf("%d hidden verticies retained for crossed triangles\n",nopreserved);
++			printf("%d hidden vertices retained for crossed triangles\n",nopreserved);
+ 			printf("Took %f secs to preserving crossing triangless\n",0.001 * (msec_time()-lmsec));
+ #endif
+ 		}	/* End of preserve shadowed triangles */
+ 
+--- a/spectro/munki.c
++++ b/spectro/munki.c
+@@ -113,9 +113,9 @@
+ 		a1logd(p->log, 1, "munki_init_coms: failed ICOM err 0x%x\n",se);
+ 		return munki_interp_code(p, icoms2munki_err(se));
+ 	}
+ 
+-	a1logd(p->log, 2, "munki_init_coms: init coms has suceeded\n");
++	a1logd(p->log, 2, "munki_init_coms: init coms has succeeded\n");
+ 
+ 	p->gotcoms = 1;
+ 	return inst_ok;
+ }
+@@ -529,9 +529,9 @@
+ 			return "Error in allocating memory";
+ 		case MUNKI_INT_CREATE_EEPROM_STORE:
+ 			return "Error in creating EEProm store";
+ 		case MUNKI_INT_NEW_RSPL_FAILED:
+-			return "Creating RSPL object faild";
++			return "Creating RSPL object failed";
+ 		case MUNKI_INT_CAL_SAVE:
+ 			return "Unable to save calibration to file";
+ 		case MUNKI_INT_CAL_RESTORE:
+ 			return "Unable to restore calibration from file";
+--- a/spectro/i1pro.c
++++ b/spectro/i1pro.c
+@@ -119,9 +119,9 @@
+ 		a1logd(p->log, 1, "i1pro_init_coms: failed ICOM err 0x%x\n",se);
+ 		return i1pro_interp_code(p, icoms2i1pro_err(se));
+ 	}
+ 
+-	a1logd(p->log, 2, "i1pro_init_coms: init coms has suceeded\n");
++	a1logd(p->log, 2, "i1pro_init_coms: init coms has succeeded\n");
+ 
+ 	p->gotcoms = 1;
+ 	return inst_ok;
+ }
+@@ -517,9 +517,9 @@
+ 			return "No calibration data to save";
+ 		case I1PRO_INT_EEPROM_DATA_MISSING:
+ 			return "EEProm data is missing";
+ 		case I1PRO_INT_NEW_RSPL_FAILED:
+-			return "Creating RSPL object faild";
++			return "Creating RSPL object failed";
+ 		case I1PRO_INT_CAL_SAVE:
+ 			return "Unable to save calibration to file";
+ 		case I1PRO_INT_CAL_RESTORE:
+ 			return "Unable to restore calibration from file";
+--- a/xicc/mpp.c
++++ b/xicc/mpp.c
+@@ -734,9 +734,9 @@
+ 		if (inst_illuminant(&inst, p->itype) != 0)
+ 			error ("mpp->set_ilob, instrument doesn't have an FWA illuminent");
+ 
+ 		if (p->spc->set_fwa(p->spc, &inst, NULL, &white))
+-			error ("mpp->set_ilob, set_fwa faild");
++			error ("mpp->set_ilob, set_fwa failed");
+ 	}
+ 
+ 	return 0;
+ }
+--- a/plot/vrml.c
++++ b/plot/vrml.c
+@@ -652,9 +652,9 @@
+ 		}
+ 		fprintf(s->fp,"            ]\n");
+ 		fprintf(s->fp,"          }\n");
+ 		fprintf(s->fp,"\n");
+-		fprintf(s->fp,"          coordIndex [ 		# Indexes of %s Verticies \n",
++		fprintf(s->fp,"          coordIndex [ 		# Indexes of %s Vertices \n",
+ 		                                                  lines ? "line" : "polygon");
+ 	
+ 		/* Spit out the lines/triangles/quads */
+ 		for (i = 0; i < s->set[set].ntrqu; i++) {
+--- a/target/ofps.c
++++ b/target/ofps.c
+@@ -2612,9 +2612,9 @@
+ 
+ 					if (tries > s->maxretries)
+ 						s->maxretries = tries;
+ #ifdef DEBUG
+-					printf(" - comb %s suceeded on retry %d (max %d)\n",pcomb(di,vv->nix),tries,s->maxretries);
++					printf(" - comb %s succeeded on retry %d (max %d)\n",pcomb(di,vv->nix),tries,s->maxretries);
+ 					printf("       oog = %f, eperr = %f, ceperr = %f\n",vv->oog,vv->eperr,vv->ceperr);
+ #endif
+ //if (tries > 10)
+ //	printf(" - comb %s suceeded on retry %d (max %d)\n",pcomb(di,vv->nix),tries,s->maxretries);
+@@ -2627,9 +2627,9 @@
+ //if (repos && vv->vv->no == 889) printf("~1 vtx no %d dtav = %f, fdist = %f\n",vv->vv->no,vv->dtav,fdist);
+ 
+ #ifdef DUMP_FERR 		/* Create .tiff of dnsq function error */
+ 					if (tries >= DUMP_FERR) {
+-						printf("Suceeded on retry %d, dumping debug rasters\n",tries);
++						printf("Succeeded on retry %d, dumping debug rasters\n",tries);
+ 
+ 						/* Re-run the last unsucessful dnsq, to trace the path */
+ 						pcx.debug = 1;
+ 						pcx.clist = NULL;
+@@ -6221,9 +6221,9 @@
+ 	acell *slist = NULL, *sliste = NULL;		/* Next to search list */
+ 	int hit = 0;
+ 
+ 	if (nn->ix < 0)
+-		error("ofps_findhit_vtxs given gamut boudary node ix %d",nn->ix);
++		error("ofps_findhit_vtxs given gamut boundary node ix %d",nn->ix);
+ 
+ #ifdef DEBUG
+ 	if (s->agrid_init == 0)
+ 		error("ofps_findhit_vtxs() called before agrid_init");
+@@ -8023,9 +8023,9 @@
+ 		if (check_vertexes(s)) {
+ 			warning("Verify of incremental vertexes failed!");
+ 			printf("Verify of incremental vertexes failed!\n");
+ 		} else {
+-			warning("Verify of incremental vertexes suceeded!");
++			warning("Verify of incremental vertexes succeeded!");
+ 		}
+ #ifdef DUMP_STRUCTURE
+ 		dump_node_vtxs(s, 1);
+ #endif
+@@ -8443,9 +8443,9 @@
+ 		fprintf(stderr,"Total function calls = %d\n",s->funccount); 
+ 		fprintf(stderr,"Average dnsqs/position = %.2f\n",s->dnsqs/(double)s->positions); 
+ 		fprintf(stderr,"Average function calls/dnsq = %.1f\n",s->funccount/(double)s->dnsqs); 
+ 		fprintf(stderr,"Maximum function calls/dnsq = %d\n",s->maxfunc); 
+-		fprintf(stderr,"Average function calls/sucessful dnsq = %.2f\n",s->sucfunc/(double)s->sucdnsq); 
++		fprintf(stderr,"Average function calls/successful dnsq = %.2f\n",s->sucfunc/(double)s->sucdnsq); 
+ 		fprintf(stderr,"Average function calls/position = %.1f\n",s->funccount/(double)s->positions); 
+ 		fprintf(stderr,"Maximum tries for dnsq sucess %d\n",s->maxretries); 
+ 		fprintf(stderr,"Number of position_vtx failures %d\n",s->posfails); 
+ 		fprintf(stderr,"Vertex hit check efficiency = %.1f%%\n",100.0 * (1.0 - s->vvchecks/(double)s->vvpchecks));
+--- a/spectro/synthread.c
++++ b/spectro/synthread.c
+@@ -486,16 +486,16 @@
+ 				gfudge = 1;
+ 			else if (nmask == ICX_K && sep_ins == icSigCmykData)
+ 				gfudge = 2;
+ 			else if (icx_colorant_comb_match_icc(nmask, sep_ins) == 0) {
+-				error("Separation ICC device space '%s' dosen't match TI1 '%s'",
++				error("Separation ICC device space '%s' doesn't match TI1 '%s'",
+ 				       icm2str(icmColorSpaceSignature, sep_ins),
+ 				       ident);	/* Should free(). */
+ 			}
+ 
+ 			/* Check if separation ICC output is compatible with ICC/MPP/TI3 conversion */ 
+ 			if (sep_outs != ins)
+-				error("Synthetic device space '%s' dosen't match Separation ICC '%s'",
++				error("Synthetic device space '%s' doesn't match Separation ICC '%s'",
+ 				       icm2str(icmColorSpaceSignature, ins),
+ 				       icm2str(icmColorSpaceSignature, sep_outs));
+ 		} else {
+ 			/* Check if synthetic device is compatible with .ti1 */
+@@ -503,9 +503,9 @@
+ 				gfudge = 1;
+ 			else if (nmask == ICX_K && ins == icSigCmykData)
+ 				gfudge = 2;		/* Should allow for other colorant combo's that include black */
+ 			else if (icx_colorant_comb_match_icc(nmask, ins) == 0) {
+-				error("Synthetic device space '%s' dosen't match TI1 '%s'",
++				error("Synthetic device space '%s' doesn't match TI1 '%s'",
+ 				       icm2str(icmColorSpaceSignature, ins),
+ 				       ident);	// Should free().
+ 			}
+ 		}
+--- a/spectro/smcube.c
++++ b/spectro/smcube.c
+@@ -292,9 +292,9 @@
+ 			return inst_unknown_model;
+ 		}
+ 		amutex_unlock(p->lock);
+ 	}
+-	a1logd(p->log, 2, "smcube_init_coms: init coms has suceeded\n");
++	a1logd(p->log, 2, "smcube_init_coms: init coms has succeeded\n");
+ 
+ 	p->gotcoms = 1;
+ 
+ 	return inst_ok;
+@@ -768,9 +768,9 @@
+ 
+ 		case SMCUBE_INT_THREADFAILED:
+ 			return "Starting diffuser position thread failed";
+ 		case SMCUBE_INT_ILL_WRITE:
+-			return "Attemp to write to factory calibration";
++			return "Attempt to write to factory calibration";
+ 		case SMCUBE_INT_WHITE_CALIB:
+ 			return "No valid white calibration";
+ 		case SMCUBE_INT_BLACK_CALIB:
+ 			return "No valid black calibration";
+@@ -1249,9 +1249,9 @@
+ 	}
+ 	itime = read_ORD16_be(buf + 4);
+ 
+ 	if (!nd)
+-		a1logd(p->log, 2, "smcube_get_idle_time: returing %d\n",itime);
++		a1logd(p->log, 2, "smcube_get_idle_time: returning %d\n",itime);
+ 
+ 	if (pitime != NULL)
+ 		*pitime = itime;
+ 
+@@ -1294,13 +1294,13 @@
+ 	}
+ 	XYZ[0] = IEEE754todouble(read_ORD32_be(buf + 4));
+ 	XYZ[1] = IEEE754todouble(read_ORD32_be(buf + 8));
+ 	XYZ[2] = IEEE754todouble(read_ORD32_be(buf + 12));
+-	a1logd(p->log, 2, "smcube_fact_measure: returing L*a*b* %f %f %f\n",XYZ[0], XYZ[1], XYZ[2]);
++	a1logd(p->log, 2, "smcube_fact_measure: returning L*a*b* %f %f %f\n",XYZ[0], XYZ[1], XYZ[2]);
+ 
+ 	icmLab2XYZ(&icmD50_100, XYZ, XYZ);
+ 
+-	a1logd(p->log, 2, "smcube_fact_measure: returing XYZ %f %f %f\n",XYZ[0], XYZ[1], XYZ[2]);
++	a1logd(p->log, 2, "smcube_fact_measure: returning XYZ %f %f %f\n",XYZ[0], XYZ[1], XYZ[2]);
+ 
+ 	return inst_ok;
+ }
+ 
+@@ -1340,9 +1340,9 @@
+ 	}
+ 	p->XYZ[0] = IEEE754todouble(read_ORD32_be(buf + 4));
+ 	p->XYZ[1] = IEEE754todouble(read_ORD32_be(buf + 8));
+ 	p->XYZ[2] = IEEE754todouble(read_ORD32_be(buf + 12));
+-	if (!nd) a1logd(p->log, 2, "smcube_poll_measure: returing L*a*b* %f %f %f\n",p->XYZ[0], p->XYZ[1], p->XYZ[2]);
++	if (!nd) a1logd(p->log, 2, "smcube_poll_measure: returning L*a*b* %f %f %f\n",p->XYZ[0], p->XYZ[1], p->XYZ[2]);
+ 
+ 	icmLab2XYZ(&icmD50_100, p->XYZ, p->XYZ);
+ 
+ 	return inst_user_trig;
+@@ -2067,9 +2067,9 @@
+ 	calf_wints(&x, &valid, 1);
+ 	calf_wtime_ts(&x, &p->gdate, 1);
+ 	calf_wdoubles(&x, p->goff, 3);
+ 
+-	a1logd(p->log,3,"nbytes = %d, Checkum = 0x%x\n",x.nbytes,x.chsum);
++	a1logd(p->log,3,"nbytes = %d, Checksum = 0x%x\n",x.nbytes,x.chsum);
+ 	calf_wints(&x, (int *)(&x.chsum), 1);
+ 
+ 	if (calf_done(&x))
+ 		x.ef = 3;
+--- a/spectro/kleink10.c
++++ b/spectro/kleink10.c
+@@ -744,9 +744,9 @@
+ 	}
+ 
+ 	if (buf[0] != 'D' || buf[1] != '1') {
+ 		amutex_unlock(p->lock);
+-		a1logd(p->log, 1, "k10_read_cal_matrix: didn't get echo'd commad D1\n");
++		a1logd(p->log, 1, "k10_read_cal_matrix: didn't get echo'd command D1\n");
+ 		return inst_protocol_error;
+ 	}
+ 
+ 	/* Send the cal index and read matrix */
+@@ -2100,9 +2100,9 @@
+ 		if (samp[i].xyz[1] > thr)
+ 			break;
+ 	}
+ 
+-	a1logd(p->log, 2, "k10_meas_delay: stoped at sample %d time %f\n",i,samp[i].sec);
++	a1logd(p->log, 2, "k10_meas_delay: stopped at sample %d time %f\n",i,samp[i].sec);
+ 
+ 	/* Compute overall delay */
+ 	dispmsec = (int)(samp[i].sec * 1000.0 + 0.5);
+ 	
+--- a/spectro/i1d3.c
++++ b/spectro/i1d3.c
+@@ -2542,9 +2542,9 @@
+ 	if ((ev = i1d3_check_status(p,&stat)) != inst_ok) {
+ 		a1logd(p->log, 1, "i1d3_init_coms: failed with rv = 0x%x\n",ev);
+ 		return ev;
+ 	}
+-	a1logd(p->log, 2, "i1d3_init_coms: suceeded\n");
++	a1logd(p->log, 2, "i1d3_init_coms: succeeded\n");
+ 
+ 	p->gotcoms = 1;
+ 	return inst_ok;
+ }
+@@ -3236,9 +3236,9 @@
+ 		if (samp[i].tot > thr)
+ 			break;
+ 	}
+ 
+-	a1logd(p->log, 2, "i1d3_meas_delay: stoped at sample %d time %f\n",i,samp[i].sec);
++	a1logd(p->log, 2, "i1d3_meas_delay: stopped at sample %d time %f\n",i,samp[i].sec);
+ 
+ 	/* Compute overall delay */
+ 	dispmsec = (int)(samp[i].sec * 1000.0 + 0.5);
+ 	instmsec = 0;
+--- a/spectro/i1disp.c
++++ b/spectro/i1disp.c
+@@ -1359,9 +1359,9 @@
+ 		if (ref_rate != NULL)
+ 			*ref_rate = rrate;
+ 		return inst_ok;
+ 	} else {
+-		a1logd(p->log, 3, "No discernable refresh frequency measured\n");
++		a1logd(p->log, 3, "No discernible refresh frequency measured\n");
+ 		if (ref_rate != NULL)
+ 			*ref_rate = 0.0;
+ 		return inst_misread;
+ 	}
+--- a/ccast/ccmdns.c
++++ b/ccast/ccmdns.c
+@@ -352,9 +352,9 @@
+ 	{
+ 		DWORD tv;
+ 		tv = 100;
+ 		if (setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv)) < 0) {
+-			DBG((g_log,0,"setsockopt timout failed with %d\n",ERRNO))
++			DBG((g_log,0,"setsockopt timeout failed with %d\n",ERRNO))
+ 			closesocket(sock);
+ 			return 1;
+ 		}
+ 	}
+@@ -363,9 +363,9 @@
+ 		struct timeval tv;
+ 		tv.tv_sec = 0;
+ 		tv.tv_usec = 100 * 1000;
+ 		if (setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv)) < 0) {
+-			DBG((g_log,0,"setsockopt timout failed with %d\n",ERRNO))
++			DBG((g_log,0,"setsockopt timeout failed with %d\n",ERRNO))
+ 			closesocket(sock);
+ 			return 1;
+ 		}
+ 	}
+--- a/spectro/spyd2.c
++++ b/spectro/spyd2.c
+@@ -2915,9 +2915,9 @@
+ 		a1logd(p->log, 1, "spyd2_init_coms: failed ICOM err 0x%x\n",se);
+ 		return spyd2_interp_code((inst *)p, icoms2spyd2_err(se));
+ 	}
+ 
+-	a1logd(p->log, 2, "spyd2_init_coms: suceeded\n");
++	a1logd(p->log, 2, "spyd2_init_coms: succeeded\n");
+ 
+ 	p->gotcoms = 1;
+ 	return inst_ok;
+ }
+@@ -3384,11 +3384,11 @@
+ 			return "Wrong status after download of PLD";
+ 		case SPYD2_BADREADSIZE:
+ 			return "Didn't read expected amount of data";
+ 		case SPYD2_TRIGTIMEOUT:
+-			return "Trigger timout";
++			return "Trigger timeout";
+ 		case SPYD2_OVERALLTIMEOUT:
+-			return "Overall timout";
++			return "Overall timeout";
+ 		case SPYD2_BAD_EE_CRC:
+ 			return "Serial EEProm CRC failed";
+ 
+ 		/* Internal errors */
+--- a/spectro/specbos.c
++++ b/spectro/specbos.c
+@@ -355,9 +355,9 @@
+ 		amutex_unlock(p->lock);
+ 		a1logd(p->log, 2, "specbos_init_coms: unrecognised model %04d\n",p->model);
+ 		return inst_unknown_model;
+ 	}
+-	a1logd(p->log, 2, "specbos_init_coms: init coms has suceeded\n");
++	a1logd(p->log, 2, "specbos_init_coms: init coms has succeeded\n");
+ 
+ 	/* See if it's a 1501 or 1511 */
+ 	if (p->model == 1501) {
+ 		int i;
+@@ -1779,9 +1779,9 @@
+ 
+ 	if ((ev = specbos_get_n_a_cals((inst *)p, &needed, &available)) != inst_ok)
+ 		return ev;
+ 
+-	a1logd(p->log,4,"specbos_calibrate: needed 0x%x, avaialble 0x%x\n",needed, available);
++	a1logd(p->log,4,"specbos_calibrate: needed 0x%x, available 0x%x\n",needed, available);
+ 
+ 	/* Translate inst_calt_all/needed into something specific */
+ 	if (*calt == inst_calt_all
+ 	 || *calt == inst_calt_needed
+--- a/plot/plot.c
++++ b/plot/plot.c
+@@ -3099,9 +3099,9 @@
+ 		if(NtQueryInformationProcess) {
+ printf("~1 found NtQueryInformationProcess\n"); fflush(stdout);
+ 			if(NtQueryInformationProcess(GetCurrentProcess(), 0,
+ 			    &pbi, sizeof(pbi), &ulSize) >= 0 && ulSize == sizeof(pbi)) {
+-printf("~1 NtQueryInformationProcess suceeded\n"); fflush(stdout);
++printf("~1 NtQueryInformationProcess succeeded\n"); fflush(stdout);
+ 
+ 				*(FARPROC *)&AttachConsole = 
+ 		          GetProcAddress(LoadLibraryA("kernel32.dll"), "AttachConsole");
+ 
+--- a/spectro/dtp22.c
++++ b/spectro/dtp22.c
+@@ -275,9 +275,9 @@
+ 		p->icom = NULL;
+ 		return inst_coms_fail;
+ 	}
+ 
+-	a1logd(p->log, 2, "dtp22_init_coms: init coms has suceeded\n");
++	a1logd(p->log, 2, "dtp22_init_coms: init coms has succeeded\n");
+ 
+ 	p->gotcoms = 1;
+ 	return inst_ok;
+ }
+--- a/spectro/dtp41.c
++++ b/spectro/dtp41.c
+@@ -255,9 +255,9 @@
+ 		a1logd(p->log, 1, "dtp41_init_coms: instrument failed to respond\n");
+ 		return inst_coms_fail;
+ 	}
+ 
+-	a1logd(p->log, 2, "dtp41_init_coms: init coms has suceeded\n");
++	a1logd(p->log, 2, "dtp41_init_coms: init coms has succeeded\n");
+ 
+ 	p->gotcoms = 1;
+ 	return inst_ok;
+ }
+--- a/xicc/xutils.c
++++ b/xicc/xutils.c
+@@ -146,9 +146,9 @@
+ 		TIFFSetErrorHandler(olderrh);
+ 		TIFFSetWarningHandler(oldwarnh);
+ 		TIFFSetErrorHandlerExt(olderrhx);
+ 		TIFFSetWarningHandlerExt(oldwarnhx);
+-		debug("TIFFOpen suceeded\n");
++		debug("TIFFOpen succeeded\n");
+ 
+ 		if (TIFFGetField(rh, TIFFTAG_ICCPROFILE, &size, &tag) == 0 || size == 0) {
+ 			debug2((errout,"no ICC profile found in '%s'\n",file_name));
+ 			TIFFClose(rh);
+--- a/spectro/rspec.c
++++ b/spectro/rspec.c
+@@ -978,9 +978,9 @@
+ 		return 1;
+ 	}
+ 	xdg_free(cal_paths, no_paths);
+ 
+-	a1logd(x->log,2,"calf_open: suceeded\n");
++	a1logd(x->log,2,"calf_open: succeeded\n");
+ 
+ 	return 0;
+ }
+ 
+--- a/spectro/chartread.c
++++ b/spectro/chartread.c
+@@ -1173,9 +1173,9 @@
+ 			rv = it->get_set_opt(it, inst_opt_trig_user);
+ 
+ 		/* Or something is wrong with instrument capabilities */
+ 		} else {
+-			printf("\nNo reasonable trigger mode avilable for this instrument\n");
++			printf("\nNo reasonable trigger mode available for this instrument\n");
+ 			it->del(it);
+ 			return -1;
+ 		}
+ 		if (rv != inst_ok) {
+@@ -1708,9 +1708,9 @@
+ 				rv = it->get_set_opt(it, omode);
+ 	
+ 			/* Or something is wrong with instrument capabilities */
+ 			} else {
+-				printf("\nNo reasonable trigger mode avilable for this instrument\n");
++				printf("\nNo reasonable trigger mode available for this instrument\n");
+ 				it->del(it);
+ 				return -1;
+ 			}
+ 			if (rv != inst_ok) {
+--- a/spectro/illumread.c
++++ b/spectro/illumread.c
+@@ -667,9 +667,9 @@
+ 				trigmode = inst_opt_trig_user;
+ 
+ 			/* Or something is wrong with instrument capabilities */
+ 			} else {
+-				printf("!!! No reasonable trigger mode avilable for this instrument !!!\n");
++				printf("!!! No reasonable trigger mode available for this instrument !!!\n");
+ 				continue;
+ 			}
+ 			if ((rv = it->get_set_opt(it, trigmode)) != inst_ok) {
+ 				printf("!!! Setting trigger mode failed with error :'%s' (%s) !!!\n",
+--- a/profile/mppprof.c
++++ b/profile/mppprof.c
+@@ -581,9 +581,9 @@
+ 	icg->del(icg);
+ 
+ 	/* Estimate the ink mixing model */
+ 	if (omix) {
+-		printf("The ink mixing model isn't implimented here yet\n");
++		printf("The ink mixing model isn't implemented here yet\n");
+ 	}
+ 
+ 	/* create and write the cgats profile */
+ 	if (p->write_mpp(p, outname, dolab))
+--- a/spectro/i1pro_imp.h
++++ b/spectro/i1pro_imp.h
+@@ -441,9 +441,9 @@
+ #define I1PRO_INT_CREATE_EEPROM_STORE   0x64		/* Error in creating EEProm store */
+ #define I1PRO_INT_SAVE_SUBT_MODE        0x65		/* Can't save calibration if in subt mode */
+ #define I1PRO_INT_NO_CAL_TO_SAVE        0x66		/* No calibration data to save */
+ #define I1PRO_INT_EEPROM_DATA_MISSING   0x67		/* EEProm data is missing */
+-#define I1PRO_INT_NEW_RSPL_FAILED       0x68		/* Creating RSPL object faild */
++#define I1PRO_INT_NEW_RSPL_FAILED       0x68		/* Creating RSPL object failed */
+ #define I1PRO_INT_CAL_SAVE              0x69		/* Unable to save calibration to file */
+ #define I1PRO_INT_CAL_RESTORE           0x6A		/* Unable to restore calibration from file */
+ #define I1PRO_INT_CAL_TOUCH             0x6B		/* Unable to touch calibration file */
+ #define I1PRO_INT_ADARK_INVALID         0x6C		/* Adaptive dark calibration is invalid */
+--- a/spectro/munki_imp.h
++++ b/spectro/munki_imp.h
+@@ -388,9 +388,9 @@
+ #define MUNKI_INT_BUTTONTIMEOUT 	    0x60		/* Switch status read timed out */
+ #define MUNKI_INT_CIECONVFAIL 	        0x61		/* Creating spectral to CIE converted failed */
+ #define MUNKI_INT_MALLOC                0x62		/* Error in mallocing memory */
+ #define MUNKI_INT_CREATE_EEPROM_STORE   0x63		/* Error in creating EEProm store */
+-#define MUNKI_INT_NEW_RSPL_FAILED       0x64		/* Creating RSPL object faild */
++#define MUNKI_INT_NEW_RSPL_FAILED       0x64		/* Creating RSPL object failed */
+ #define MUNKI_INT_CAL_SAVE              0x65		/* Unable to save calibration to file */
+ #define MUNKI_INT_CAL_RESTORE           0x66		/* Unable to restore calibration from file */
+ #define MUNKI_INT_CAL_TOUCH             0x67        /* Unable to touch calibration file */
+ 
+--- a/spectro/spec2cie.c
++++ b/spectro/spec2cie.c
+@@ -214,9 +214,9 @@
+ 				} else if (na[0] == 'G' && na[1] == 'X') {
+ 					calstdi = xcalstd_gmdi;
+ 					calstdo = xcalstd_xrdi;
+ 				} else {
+-					//usage("Paramater after -A '%c%c' not recognized",na[0],na[1]);
++					//usage("Parameter after -A '%c%c' not recognized",na[0],na[1]);
+ 					usage();
+ 				}
+ 			}
+ 

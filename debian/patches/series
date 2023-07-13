@@ -1,0 +1,8 @@
+0105_dispwin_segfault.patch
+0100_spelling.patch
+0001_jam.patch
+0115_hurd_PATH_MAX.patch
+#0110_usb-db_new.patch
+#0120_kfreebsd.patch
+0125_gcc5.patch
+#999_GCC-10-fix.patch

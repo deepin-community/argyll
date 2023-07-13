@@ -1,0 +1,2 @@
+usb/55-Argyll.rules lib/udev/rules.d/
+usr/bin/*

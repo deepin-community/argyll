@@ -1,4 +1,104 @@
 #!/usr/bin/make -f
 
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+include /usr/share/dpkg/pkg-info.mk
+
+export DH_OPTIONS
+
+# hardening
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+NO_PROC=$(shell cat /proc/cpuinfo | grep processor | wc -l)
+
+JAMCMDLINE = -q -fJambase -j$(NO_PROC) -sPREFIX=/usr -sDESTDIR=$(CURDIR)/debian/tmp  -sREFSUBDIR=share/color/argyll/ref
+CRDATE=$(shell LC_ALL=C date --utc --date='@$(SOURCE_DATE_EPOCH)' "+%a %b %d %T %Y")
+
 %:
 	dh $@
+
+override_dh_auto_build:
+	find $(CURDIR) -name "*" | xargs chmod -R -x+X
+	chmod a+x $(CURDIR)/debian/rules
+	jam $(JAMCMDLINE) all
+
+override_dh_auto_install:
+	jam $(JAMCMDLINE) dirs
+	jam $(JAMCMDLINE) install
+	rm $(CURDIR)/debian/tmp/usr/bin/License.txt
+	#
+	# Make build results reproducible.
+	#
+	sed -i 's/CREATED.*/CREATED $(CRDATE)/' $(CURDIR)/debian/tmp/usr/share/color/argyll/ref/RefMediumGamut.gam
+	sed -i 's/CREATED.*/CREATED $(CRDATE)/' $(CURDIR)/debian/tmp/usr/share/color/argyll/ref/linear.cal
+	sed -i 's/CREATED.*/CREATED $(CRDATE)/' $(CURDIR)/debian/tmp/usr/share/color/argyll/ref/strange.cal
+
+override_dh_installdocs-indep:
+	dh_installdocs
+	mv $(CURDIR)/debian/argyll-doc/usr/share/doc/argyll/* $(CURDIR)/debian/argyll-doc/usr/share/doc/argyll-doc/
+	rmdir $(CURDIR)/debian/argyll-doc/usr/share/doc/argyll
+	rm -f $(CURDIR)/debian/argyll-doc/usr/share/doc/argyll-doc/License.txt
+	rm -f $(CURDIR)/debian/argyll-doc/usr/share/doc/argyll-doc/License2.txt
+	rm -f $(CURDIR)/debian/argyll-doc/usr/share/doc/argyll-doc/License3.txt
+	rm -f $(CURDIR)/debian/argyll-doc/usr/share/doc/argyll-doc/License4.txt
+	rm -f $(CURDIR)/debian/argyll-doc/usr/share/doc/argyll-doc/DocLicense.txt
+	rm -f $(CURDIR)/debian/argyll-doc/usr/share/doc/argyll-doc/afiles
+
+override_dh_installchangelogs:
+	dh_installchangelogs log.txt
+
+override_dh_builddeb:
+	dh_builddeb
+
+override_dh_compress:
+	dh_compress -X.html
+
+build-manpages:
+	help2man -N --no-discard-stderr --name="Apply device calibration to an ICC profile." debian/tmp/usr/bin/applycal > debian/man/applycal.1
+	help2man -N --no-discard-stderr --name="Dump an ICC file in human readable form." debian/tmp/usr/bin/iccdump > debian/man/iccdump.1
+	help2man -N --no-discard-stderr --name="Translate colors through an ICC profile." debian/tmp/usr/bin/icclu > debian/man/icclu.1
+	help2man -N --no-discard-stderr --name="Average or merge values in .ti3 like files." debian/tmp/usr/bin/average > debian/man/average.1
+	help2man -N --no-discard-stderr --name="Convert Colorblind raw device profile data to Argyll data." debian/tmp/usr/bin/cb2ti3 > debian/man/cb2ti3.1
+	help2man -N --no-discard-stderr --name="Color Correct a TIFF file using any sequence of ICC profiles or Calibrations." debian/tmp/usr/bin/cctiff > debian/man/cctiff.1
+	help2man -N --no-discard-stderr --name="Create CCMX or CCSS." debian/tmp/usr/bin/ccxxmake > debian/man/ccxxmake.1
+	help2man -N --no-discard-stderr --name="Read Target Test Chart." debian/tmp/usr/bin/chartread > debian/man/chartread.1
+	help2man -N --no-discard-stderr --name="Link ICC profiles." debian/tmp/usr/bin/collink > debian/man/collink.1
+	help2man -N --no-discard-stderr --name="Create ICC profile." debian/tmp/usr/bin/colprof > debian/man/colprof.1
+	help2man -N --no-discard-stderr --name="Verify CIE values." debian/tmp/usr/bin/colverify > debian/man/colverify.1
+	help2man -N --no-discard-stderr --name="Calibrate a Display." debian/tmp/usr/bin/dispcal > debian/man/dispcal.1
+	help2man -N --no-discard-stderr --name="Read a Display." debian/tmp/usr/bin/dispread > debian/man/dispread.1
+	help2man -N --no-discard-stderr --name="Test display patch window, Set Video LUTs, Install profiles." debian/tmp/usr/bin/dispwin > debian/man/dispwin.1
+	help2man -N --no-discard-stderr --name="Extract an ICC profile from a TIFF file." debian/tmp/usr/bin/extracticc > debian/man/extracticc.1
+	help2man -N --no-discard-stderr --name="Extract a text tag from an ICC profile." debian/tmp/usr/bin/extractttag > debian/man/extractttag.1
+	help2man -N --no-discard-stderr --name="Create a fake CMY data file from a CMYK profile." debian/tmp/usr/bin/fakeCMY > debian/man/fakeCMY.1
+	help2man -N --no-discard-stderr --name="Fake test chart reader - lookup values in ICC/MPP profile." debian/tmp/usr/bin/fakeread > debian/man/fakeread.1
+	help2man -N --no-discard-stderr --name="Convert a TIFF file to monochrome using an ICC device profile." debian/tmp/usr/bin/greytiff > debian/man/greytiff.1
+	help2man -N --no-discard-stderr --name="Dump an ICC file in human readable form." debian/tmp/usr/bin/iccdump > debian/man/iccdump.1
+	help2man -N --no-discard-stderr --name="Create Lab/Jab gamut plot." debian/tmp/usr/bin/iccgamut > debian/man/iccgamut.1
+	help2man -N --no-discard-stderr --name="Measure an illuminant." debian/tmp/usr/bin/illumread > debian/man/illumread.1
+	help2man -N --no-discard-stderr --name="Check fwd to bwd relative transfer of an ICC file." debian/tmp/usr/bin/invprofcheck > debian/man/invprofcheck.1
+	help2man -N --no-discard-stderr --name="Convert Kodak raw printer profile data to Argyll print data." debian/tmp/usr/bin/kodak2ti3 > debian/man/kodak2ti3.1
+	help2man -N --no-discard-stderr --name="Check Model Printer Profile." debian/tmp/usr/bin/mppcheck > debian/man/mppcheck.1
+	help2man -N --no-discard-stderr --name="Translate colors through an MPP profile." debian/tmp/usr/bin/mpplu > debian/man/mpplu.1
+	help2man -N --no-discard-stderr --name="Create Model Printer Profile." debian/tmp/usr/bin/mppprof > debian/man/mppprof.1
+	help2man -N --no-discard-stderr --name="List information about the FILEs." debian/tmp/usr/bin/oeminst > debian/man/oeminst.1
+	help2man -N --no-discard-stderr --name="Create printer calibration." debian/tmp/usr/bin/printcal > debian/man/printcal.1
+	help2man -N --no-discard-stderr --name="Generate Target PostScrip file." debian/tmp/usr/bin/printtarg > debian/man/printtarg.1
+	help2man -N --no-discard-stderr --name="Check accuracy of ICC profile." debian/tmp/usr/bin/profcheck > debian/man/profcheck.1
+	help2man -N --no-discard-stderr --name="Create abstract correction profile given table of absolute CIE correction values." debian/tmp/usr/bin/refine > debian/man/refine.1
+	help2man -N --no-discard-stderr --name="Invert AtoB1 to make BtoA1 for CMYK profiles." debian/tmp/usr/bin/revfix > debian/man/revfix.1
+	help2man -N --no-discard-stderr --name="Scanin." debian/tmp/usr/bin/scanin > debian/man/scanin.1
+	help2man -N --no-discard-stderr --name="Convert spectral .ti3 file." debian/tmp/usr/bin/spec2cie > debian/man/spec2cie.1
+	help2man -N --no-discard-stderr --name="Plot spectrum and calculate CCT and VCT." debian/tmp/usr/bin/specplot > debian/man/specplot.1
+	help2man -N --no-discard-stderr --name="Split a .ti3 into two." debian/tmp/usr/bin/splitti3 > debian/man/splitti3.1
+	help2man -N --no-discard-stderr --name="Read Print Spot values." debian/tmp/usr/bin/spotread > debian/man/spotread.1
+	help2man -N --no-discard-stderr --name="Create a synthetic calibration file." debian/tmp/usr/bin/synthcal > debian/man/synthcal.1
+	help2man -N --no-discard-stderr --name="Synthetic device model test chart reader." debian/tmp/usr/bin/synthread > debian/man/synthread.1
+	help2man -N --no-discard-stderr --name="Generate Target deviceb test chart color values." debian/tmp/usr/bin/targen > debian/man/targen.1
+	help2man -N --no-discard-stderr --name="Create VRML image of the gamut surface of a TIFF." debian/tmp/usr/bin/tiffgamut > debian/man/tiffgamut.1
+	help2man -N --no-discard-stderr --name="Create test images, default hex RGB surface and wedge." debian/tmp/usr/bin/timage > debian/man/timage.1
+	help2man -N --no-discard-stderr --name="Convert Gretag/Logo or X-Rite ColorPport raw RGB or CMYK device profile data to Argyll CGATS data." debian/tmp/usr/bin/txt2ti3 > debian/man/txt2ti3.1
+	help2man -N --no-discard-stderr --name="View gamuts." debian/tmp/usr/bin/viewgam > debian/man/viewgam.1
+	help2man -N --no-discard-stderr --name="Translate colors through an xicc." debian/tmp/usr/bin/xicclu > debian/man/xicclu.1
+	help2man -N --no-discard-stderr --name="Convert LightSpace raw RGB device profile data to Argyll CGATS dat" debian/tmp/usr/bin/ls2ti3 > debian/man/ls2ti3.1
