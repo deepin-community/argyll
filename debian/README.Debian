@@ -1,0 +1,16 @@
+argyll for Debian
+-----------------
+
+Notes for KFreeBSD-*:
+
+From spectro/usbio_bsd.c:
+
+	!!!! This driver is incomplete and non-functional !!!!
+	BSD uses fd per end point, so simplifies things.
+	No clear ep or abort i/o though, so we could try clear halt,
+	or close fd and see if that works in aborting transaction ?
+	Posix aio would probably work, but it's not loaded by default :-(
+	Could use libusb20 API, but not backwards or cross compatible,
+	and is very likely to be buggy ?
+
+ -- Jörg Frings-Fürst <debian@jff-webhosting.net>  Mon, 29 Sep 2014 09:17:15 +0200

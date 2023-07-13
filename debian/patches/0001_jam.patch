@@ -1,0 +1,149 @@
+Description: Add multiarch support to jam files
+Author: Jörg Frings Fürst <debian@jff-webhosting.net>
+Forwarded: http://www.freelists.org/post/argyllcms/Some-buildsystem-issues
+Last-Update: 2015-08-23
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/Jambase
++++ b/Jambase
+@@ -980,9 +980,9 @@
+ 	}
+ 
+ 	# UNIX defaults
+ 
+-	CCFLAGS			?= -DUNIX -D_THREAD_SAFE -pipe ;
++	CCFLAGS			?= $(CPPFLAGS) -g -DUNIX -D_THREAD_SAFE -pipe -fPIC ;
+ 	CCOPTFLAG		?= -O2 ;		
+ 	CCDEBUGFLAG		?= -g ;		
+ 	CCPROFFLAG		?= ;		
+ 	CCSHOBJFLAG		?= -fPIC ;			# Position independent is better for ShLibrary
+@@ -990,9 +990,9 @@
+ 	CHMOD			?= chmod ;
+ 	CHGRP			?= chgrp ;
+ 	CHOWN			?= chown ;
+ 	LEX				?= lex ;
+-	LINKFLAGS		?= ;
++	LINKFLAGS		?= $(LDFLAGS) ;
+ 	LINKOPTFLAG		?= -O ;				# Affects creating .so's
+ 	LINKSTRIPFLAG	?= -s ;
+ 	LINKDEBUGFLAG	?= ;
+ 	LINKPROFFLAG	?= ;
+@@ -1089,9 +1089,9 @@
+ 	RM				?= rm -f ;
+ 	RMDIR			?= $(RM) ;
+ 	RSH				?= rsh ;
+ 	SED				?= sed ;
+-	SHELLHEADER		?= "#!/bin/sh" ;
++	SHELLHEADER		?= "#!/bin/bash" ;
+ 	SHELLMODE		?= 755 ;
+ 	SLASH			?= / ;
+ 	STDHDRS			?= /usr/include ;
+ 	SUFEXE			?= "" ;
+--- a/Jamtop
++++ b/Jamtop
+@@ -18,8 +18,9 @@
+ 
+ # Keep this DESTDIR anchored to Jamtop. PREFIX is used literally
+ ANCHORED_PATH_VARS = DESTDIR ;
+ 
++BUILD_SHARED_LIB = 1 ;
+ 
+ # Should we also allow CFLAGS, CXXFLAGS, CPPFLAGS & LDFLAGS env. variables
+ # to have effect ?
+ 
+@@ -154,19 +155,84 @@
+ 		subd = $(3) ;
+ 	}
+ 
+ 	if ! $(BUILTIN_$(UCASE)) && $(UNIX) {
+-		if  [ GLOB /usr/include$(subd) : $(lcase).h $(lcase)lib.h ]
+-	     || [ GLOB /usr/local/include$(subd) : $(lcase).h $(lcase)lib.h ]
+-		 || [ GLOB /usr/include/x86_64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+-	     || [ GLOB /usr/include/i386-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ] {
+-			if  [ GLOB /usr/lib : lib$(lcase).so ] || [ GLOB /usr/lib : lib$(lcase).a ]
+-			 || [ GLOB /usr/local/lib : lib$(lcase).so ] || [ GLOB /usr/local/lib : lib$(lcase).a ]
+-			 || [ GLOB /usr/lib64 : lib$(lcase).so ] || [ GLOB /usr/lib64 : lib$(lcase).a ]
+-			 || [ GLOB /usr/lib/x86_64-linux-gnu : lib$(lcase).so ]
+-			 || [ GLOB /usr/lib/x86_64-linux-gnu : lib$(lcase).a ]
+-	         || [ GLOB /usr/lib/i386-linux-gnu : lib$(lcase).so ]
+-	         || [ GLOB /usr/lib/i386-linux-gnu : lib$(lcase).a ] {
++	    if  [ GLOB /usr/include$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/local/include$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/x86_64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/i386-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/alpha-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/aarch64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/arm-linux-gnueabi$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/arm-linux-gnueabihf$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/hppa-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/i386-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/x86_64-kfreebsd-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/i386-kfreebsd-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/m68k-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/mips-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/mipsel-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/mips64el-linux-gnuabi64$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/powerpc-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/powerpc-linux-gnuspe$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/powerpc64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/powerpc64le-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/s390x-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/sh4-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/sparc-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/sparc64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/x86_64-linux-gnux32$(subd) : $(lcase).h $(lcase)lib.h ] {
++		    if  [ GLOB /usr/lib : lib$(lcase).so ] || [ GLOB /usr/lib : lib$(lcase).a ]
++			|| [ GLOB /usr/local/lib : lib$(lcase).so ]
++			|| [ GLOB /usr/local/lib : lib$(lcase).a ]
++			|| [ GLOB /usr/lib64 : lib$(lcase).so ]
++			|| [ GLOB /usr/lib64 : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/x86_64-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/x86_64-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/i386-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/i386-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/alpha-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/alpha-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/aarch64-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/aarch64-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/arm-linux-gnueabi : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/arm-linux-gnueabi : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/arm-linux-gnueabihf : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/arm-linux-gnueabihf : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/hppa-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/hppa-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/i386-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/i386-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/x86_64-kfreebsd-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/x86_64-kfreebsd-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/i386-kfreebsd-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/i386-kfreebsd-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/m68k-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/m68k-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/mips-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/mips-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/mipsel-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/mipsel-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/mips64el-linux-gnuabi64 : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/mips64el-linux-gnuabi64 : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/powerpc-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/powerpc-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/powerpc-linux-gnuspe : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/powerpc-linux-gnuspe : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/powerpc64-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/powerpc64-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/powerpc64le-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/powerpc64le-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/s390x-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/s390x-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/sh4-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/sh4-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/sparc-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/sparc-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/sparc64-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/sparc64-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/x86_64-linux-gnux32 : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/x86_64-linux-gnux32 : lib$(lcase).a ] {
+ 				echo "Using system $(UCASE) library" ;
+ 				$(UCASE)LIB = ;
+ 				$(UCASE)INC = ;
+ 				LINKFLAGS += $(LINKFLAG)$(lcase) ;
