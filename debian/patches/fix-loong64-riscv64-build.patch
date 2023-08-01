@@ -1,0 +1,27 @@
+Description: Add loong64 & riscv64 support
+Author: Han Gao <gaohan@iscas.ac.cn>
+
+Last-Update: 2023-03-27
+
+--- argyll-2.3.1+repack.orig/Jamtop
++++ argyll-2.3.1+repack/Jamtop
+@@ -168,6 +168,8 @@ rule CheckForLibrary {
+ 		|| [ GLOB /usr/include/i386-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/x86_64-kfreebsd-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/i386-kfreebsd-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++                || [ GLOB /usr/include/riscv64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++                || [ GLOB /usr/include/loongarch64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/m68k-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/mips-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/mipsel-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+@@ -206,6 +208,10 @@ rule CheckForLibrary {
+ 			|| [ GLOB /usr/lib/x86_64-kfreebsd-gnu : lib$(lcase).a ]
+ 			|| [ GLOB /usr/lib/i386-kfreebsd-gnu : lib$(lcase).so ]
+ 			|| [ GLOB /usr/lib/i386-kfreebsd-gnu : lib$(lcase).a ]
++                        || [ GLOB /usr/lib/riscv64-linux-gnu : lib$(lcase).so ]
++                        || [ GLOB /usr/lib/riscv64-linux-gnu : lib$(lcase).a ]
++                        || [ GLOB /usr/lib/loongarch64-linux-gnu : lib$(lcase).so ]
++                        || [ GLOB /usr/lib/loongarch64-linux-gnu : lib$(lcase).a ]
+ 			|| [ GLOB /usr/lib/m68k-linux-gnu : lib$(lcase).so ]
+ 			|| [ GLOB /usr/lib/m68k-linux-gnu : lib$(lcase).a ]
+ 			|| [ GLOB /usr/lib/mips-linux-gnu : lib$(lcase).so ]

@@ -6,3 +6,4 @@
 #0120_kfreebsd.patch
 0125_gcc5.patch
 #999_GCC-10-fix.patch
+fix-loong64-riscv64-build.patch

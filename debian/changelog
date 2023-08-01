@@ -1,3 +1,9 @@
+argyll (2.3.1+repack-1.1deepin1) unstable; urgency=medium
+
+  * Add loong64 & riscv64 support 
+
+ -- Han Gao <gaohan@iscas.ac.cn>  Mon, 27 Mar 2023 14:44:34 +0800
+
 argyll (2.3.1+repack-1.1) unstable; urgency=medium
 
   * Non-maintainer upload.
