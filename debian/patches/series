@@ -7,3 +7,4 @@
 0125_gcc5.patch
 #999_GCC-10-fix.patch
 fix-loong64-riscv64-build.patch
+0001-feat-add-sw64-support.patch

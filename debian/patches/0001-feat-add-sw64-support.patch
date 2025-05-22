@@ -1,0 +1,21 @@
+Index: argyll/Jamtop
+===================================================================
+--- argyll.orig/Jamtop
++++ argyll/Jamtop
+@@ -161,6 +161,7 @@ rule CheckForLibrary {
+ 		|| [ GLOB /usr/include/x86_64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/i386-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/alpha-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
++		|| [ GLOB /usr/include/sw_64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/aarch64-linux-gnu$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/arm-linux-gnueabi$(subd) : $(lcase).h $(lcase)lib.h ]
+ 		|| [ GLOB /usr/include/arm-linux-gnueabihf$(subd) : $(lcase).h $(lcase)lib.h ]
+@@ -194,6 +195,8 @@ rule CheckForLibrary {
+ 			|| [ GLOB /usr/lib/i386-linux-gnu : lib$(lcase).a ]
+ 			|| [ GLOB /usr/lib/alpha-linux-gnu : lib$(lcase).so ]
+ 			|| [ GLOB /usr/lib/alpha-linux-gnu : lib$(lcase).a ]
++			|| [ GLOB /usr/lib/sw_64-linux-gnu : lib$(lcase).so ]
++			|| [ GLOB /usr/lib/sw_64-linux-gnu : lib$(lcase).a ]
+ 			|| [ GLOB /usr/lib/aarch64-linux-gnu : lib$(lcase).so ]
+ 			|| [ GLOB /usr/lib/aarch64-linux-gnu : lib$(lcase).a ]
+ 			|| [ GLOB /usr/lib/arm-linux-gnueabi : lib$(lcase).so ]
