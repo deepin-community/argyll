@@ -1,3 +1,9 @@
+argyll (2.3.1+repack-1.1deepin2) unstable; urgency=medium
+
+  * feat: add sw63 support
+
+ -- Deepin Packages Builder <packages@deepin.org>  Thu, 22 May 2025 14:27:10 +0800
+
 argyll (2.3.1+repack-1.1deepin1) unstable; urgency=medium
 
   * Add loong64 & riscv64 support 
